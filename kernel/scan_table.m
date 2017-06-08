@@ -37,7 +37,8 @@ AGBT16B_400_01.goodX = goodX;
 AGBT16B_400_01.goodY = goodY;
 
 AGBT16B_400_01.fudge = 35/51;
-
+AGBT16B_400_01.Xdims = [-0.25, 0.25];
+AGBT16B_400_01.Ydims = [-0.175, 0.275];
 
 %% AGBT16B_400_02
 AGBT16B_400_02.session_name = 'AGBT16B_400_02';
@@ -70,6 +71,9 @@ AGBT16B_400_02.X = X;
 AGBT16B_400_02.Y = Y;
 AGBT16B_400_02.goodX = goodX;
 AGBT16B_400_02.goodY = goodY;
+
+AGBT16B_400_02.Xdims = [86.923, 98.6746];
+AGBT16B_400_02.Ydims = [72.3728, 75.255];
 
 AGBT16B_400_02.fudge = 0;
 
@@ -105,7 +109,9 @@ AGBT16B_400_03.Y = Y;
 AGBT16B_400_03.goodX = goodX;
 AGBT16B_400_03.goodY = goodY;
 
-AGBT16B_400_03.fudge = 0;
+AGBT16B_400_03.fudge = -45/62;
+AGBT16B_400_03.Xdims = [-0.25, 0.25];
+AGBT16B_400_03.Ydims = [-0.15, 0.225];
 
 %% AGBT16B_400_04
 AGBT16B_400_04.session_name = 'AGBT16B_400_04';
