@@ -54,7 +54,7 @@ function [ R, my_az, my_el, info ] = aggregate_banks( save_dir, ant_dir, tstamp,
 
     % Extract offsets
     % ant_dir = '/home/gbtdata/AGBT16B_400_05/Antenna';
-    use_radec = 1;
+    use_radec = 0;
     ant_fits_file = sprintf('%s/%s.fits', ant_dir, tstamp);
     [ant_dmjd, az_off, el_off] = get_antenna_positions(ant_fits_file, use_radec);
 
