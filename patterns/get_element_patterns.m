@@ -5,7 +5,7 @@ clearvars;
 addpath ../kernel/
 scan_table; % Found in kernel directory
 
-session = AGBT16B_400_01;
+session = AGBT16B_400_03;
 pol = 'X';
 
 % Extract polarization indexing information
@@ -51,14 +51,14 @@ end
 
 % Interpolated map
 Npoints = 80;
-minX = -0.275;
-maxX =  0.275;
-minY = -0.175;
-maxY =  0.275;
+minX = session.Xdims(1);
+maxX = session.Xdims(2);
+minY = session.Ydims(1);
+maxY = session.Ydims(2);
 xval = linspace(minX, maxX, Npoints);
 yval = linspace(minY, maxY, Npoints);
 [X,Y] = meshgrid(linspace(minX,maxX,Npoints), linspace(minY,maxY,Npoints));
-map_fig = figure();
+map_fig = figure('position', [0, 0, 640, 480]*1.2);
 fudge = session.fudge;
 for e = 1:Nele %Nele
     for b = 101:101 %Nbins
@@ -68,10 +68,15 @@ for e = 1:Nele %Nele
         imagesc(xval, yval, Sq);
         set(gca, 'ydir', 'normal');
         colormap('jet');
-        xlabel('Cross-Elevation Offset (degrees)');
-        ylabel('Elevation Offset (degrees)');
-        title(sprintf('Element %d%s', e, pol));
+        xlabel('Xel');
+        ylabel('El');
+        title(sprintf('%d%s', e, pol));
     end
 end
 
-
+% Save figure
+fig_filename = sprintf('%s_%spol_elem_patterns', session.session_name, pol);
+saveas(map_fig, sprintf('%s.png', fig_filename));
+saveas(map_fig, sprintf('%s.pdf', fig_filename));
+saveas(map_fig, sprintf('%s.eps', fig_filename));
+saveas(map_fig, sprintf('%s.fig', fig_filename), 'fig');
