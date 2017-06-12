@@ -2,6 +2,9 @@
 data_root = '/lustre/projects/flag';
 meta_root = '/home/gbtdata';
 proj_id = 'AGBT16B_400';
+obs_long = 38.419531;
+obs_lat  = -79.831808;
+G = 6.6; % Approximate for constant of the year used to calculate GST
 
 %% AGBT16B_400_01
 % Scan numbers and time stamps
@@ -51,6 +54,15 @@ for i = 1:length(time_stamps)
     my_stamp = strrep(my_stamp, '-', '_');
     my_stamp = strrep(my_stamp, 'T', '_');
     AGBT16B_400_02.scans{i} = my_stamp;
+    % Get GMST to calculate az and el using ra and dec.
+    ut_hr = str2double([my_stamp(12) my_stamp(13)]);
+    ut_min = str2double([my_stamp(15) my_stamp(16)]);
+    ut_sec = str2double([my_stamp(18) my_stamp(19)]);
+    t = ut_hr + (ut_min/60) + (ut_sec/3600);
+    my_day = str2double([my_stamp(9) my_stamp(10)]);
+    day_year = 120;
+    d = day_year + my_day;
+    AGBT16B_400_02.GMST(i) = G + 0.0657098244*d + 1.00273791*t;
 end
 
 % Frequency mask
