@@ -19,9 +19,13 @@ function [ dmjd, az_off, el_off, ra, dec ] = get_antenna_positions( fits_file, u
     ra = data{ra_idx};
     dec = data{dec_idx};
     
-    if use_radec
+    if use_radec == 1
         az_off = ra;
         el_off = dec;
+    elseif use_radec == -1
+        % mnt entries correspond to encoder values
+        el_off = data{mnt_el_idx};
+        az_off = data{mnt_az_idx}.*cos(el_off*pi/180);
     else
         % mnt entries correspond to encoder values
         mnt_el = data{mnt_el_idx};
