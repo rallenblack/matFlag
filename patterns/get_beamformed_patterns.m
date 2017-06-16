@@ -1,4 +1,4 @@
-function [AZ, EL, patterns] = get_beamformed_patterns(session, pol, beam_az, beam_el)
+function [AZ, EL, patterns] = get_beamformed_patterns(session, pol, w)
 
     % Read scan table for session information
     scan_table;
@@ -14,41 +14,17 @@ function [AZ, EL, patterns] = get_beamformed_patterns(session, pol, beam_az, bea
     end
     load(filename);
     
-    % Load in weights
-    w_filename = sprintf('%s/%s_aggregated_weights_%s.mat', out_dir,...
-        session.session_name, pol);
-    if ~exist(w_filename, 'file')
-        error(sprintf('The weight vectors file %s does not exist!\n',...
-            w_filename));
-    end
-    load(w_filename);
-    
-    % Get beam weights
-    % Find closest AZ/EL for specified beam locations
-    Nbeam = length(beam_el);
-    for beam = 1:Nbeam
-        delta_el = (EL - beam_el(beam)).^2;
-        delta_az = (AZ - beam_az(beam)).^2;
-        d = sqrt(delta_el + delta_az);
-        
-        [~, beam_idx(beam)] = min(d);
-    end
-    
-    plot(AZ, EL);
-    hold on;
-    plot(AZ(beam_idx), EL(beam_idx), 'rx');
-    hold off;
-    
     % Iterate over elements and steering vectors
+    Nbeam = size(w, 2);
     patterns = zeros(Nbeam, size(a_agg,2), size(a_agg,3));
     for beam = 1:Nbeam
         fprintf('Processing beam %d\n', beam);
-        w = squeeze(w_agg(:,beam_idx(beam),:));
+        w1 = squeeze(w(:,beam,:));
         for i = 1:size(a_agg,2)
             for b = 1:size(a_agg,3)
                 % Zero insert for bad elements
                 a = a_agg(:,i,b);
-                patterns(beam,i,b) = abs(w(:,b)'*a)^2;
+                patterns(beam,i,b) = abs(w1(:,b)'*a)^2;
             end
         end
     end
