@@ -171,6 +171,8 @@ AGBT16B_400_04.goodX = goodX;
 AGBT16B_400_04.goodY = goodY;
 
 AGBT16B_400_04.fudge = 0;
+AGBT16B_400_04.Xdims = [212.4, 213.3];
+AGBT16B_400_04.Ydims = [51.9, 52.5];
 
 AGBT16B_400_04.on_scans = 22;
 AGBT16B_400_04.off_scans = [21, 23];
@@ -212,3 +214,6 @@ AGBT16B_400_05.fudge = 0;
 
 AGBT16B_400_05.on_scans = 24;
 AGBT16B_400_05.off_scans = [23, 25];
+
+AGBT16B_400_05.Xdims = [85.25, 86.05];
+AGBT16B_400_05.Ydims = [49.6, 50.1];

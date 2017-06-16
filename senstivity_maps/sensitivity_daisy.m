@@ -1,4 +1,4 @@
-% Aggregate weights and plot sensitvity map
+% Daisy - Aggregate weights and plot sensitvity map
 close all;
 clearvars;
 
@@ -10,17 +10,17 @@ tic;
 
 pol = 'Y';
 
-% % AGBT16B_400_04 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-session = AGBT16B_400_04;
-% % Daisy
+% % AGBT16B_400_04 Daisy %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% session = AGBT16B_400_04;
+% on_scans = 22;
+% off_scans = [21, 23];
+% source = source3C295;
+
+% % AGBT16B_400_05 Daisy %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+session = AGBT16B_400_05;
 on_scans = 22;
 off_scans = [21, 23];
-source = source3C295;
-
-% % AGBT16B_400_05 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% session = AGBT16B_400_05;
-% on_scans = 24;
-% off_scans = [23, 25];
+source = source3C147;
 
 on_tstamp = session.scans(on_scans);
 off_tstamp = session.scans(off_scans);
@@ -82,7 +82,7 @@ for j = 1:length(off_tstamp)
 
         % Extract data and save
         if ~exist(filename, 'file') || overwrite == 1
-            [R, az_tmp, el_tmp, ~] = aggregate_single_bank(save_dir, ant_dir, tmp_stmp, banks{b}, -1);
+            [R, az_tmp, el_tmp, ~, ~] = aggregate_single_bank(save_dir, ant_dir, tmp_stmp, banks{b}, -1);
 
             % Off pointings are dwell scans; need single R, az, and el
             az = mean(az_tmp);
@@ -102,7 +102,6 @@ plot(AZoff, ELoff, 'x');
 
 % Iterate over on pointings
 fprintf('Processing on pointings...\n');
-Sens = [];
 AZ = [];
 EL = [];
 cal = [];
@@ -118,11 +117,30 @@ for bank = 1:length(banks)
 
         % Extract data and save
         if ~exist(filename, 'file') || overwrite == 1
-            [R, az, el, info] = aggregate_single_bank(save_dir, ant_dir, tmp_stmp, banks{bank}, 10);
-            save(filename, 'R', 'az', 'el');
+            [R, az, el, xid, info] = aggregate_single_bank(save_dir, ant_dir, tmp_stmp, banks{bank}, 4);
+            if isempty(R) && isempty(az) && isempty(el) && isempty(info)
+                fprintf('Skipping\n');
+                continue;
+            end
+            save(filename, 'R', 'az', 'el', 'xid');
         else
             load(filename);
+            if isempty(R) && isempty(az) && isempty(el)
+                fprintf('Skipping\n');
+                continue;
+            end
         end
+        
+        % Compute max-SNR weights and compute sensitivity
+        if bank == 1
+            fprintf('FIRST BANK\n');
+            Sens = zeros(size(R,4), 500);
+        end
+        
+        % Get absolute channel indices from xid
+        chans = [1:5, 101:105, 201:205, 301:305, 401:405] + 5*xid;
+        disp(chans);
+        
         % Off pointings are dwell scans; need single R, az, and el
         hold on;
         plot(az, el, '-b');
@@ -140,41 +158,38 @@ for bank = 1:length(banks)
         [~, idx] = min(vector_distance);
         fprintf('     Using %s as the off pointing...\n', off_tstamp{idx});
         OFF = load(sprintf('%s/%s_%s', out_dir, off_tstamp{idx}, banks{bank}));
-
-        % Compute max-SNR weights and compute sensitivity
-        Senstmp = zeros(size(R,4),size(R,3));
+        if isempty(OFF.R)
+            fprintf('No OFF - skipping\n');
+            continue;
+        end
 
         % Get steering vectors
         fprintf('     Obtaining steering vectors...\n');
-        a = get_steering_vectors(R, OFF.R, good_idx, bad_freqs, save_dir, tmp_stmp, pol, 0);
+        a = get_steering_vectors_single_bank(R, OFF.R, good_idx, xid, bad_freqs, save_dir, tmp_stmp, pol, 0);
 
-        if i == 1
-            a_agg = a;
-        else
-            % Append to aggregated steering vector matrix
-            a_agg = cat(2, a_agg, a);
-        end
+        a_agg = a;
+        w = zeros(size(a,1), size(a,2), 500);
 
         fprintf('     Calculating weights and sensitivity...\n');
-        w = zeros(size(a));
         for t = 1:size(R,4)
-            for b = 1:size(R,3)
+            bidx = 1;
+            for b = chans
                 if sum(bad_freqs == b) == 0
-                    w(:,t,b) = OFF.R(good_idx, good_idx, b)\a(:,t,b);
-                    w(:,t,b) = w(:,t,b)./(w(:,t,b)'*a(:,t,b));
-                    Pon = w(:,t,b)'*R(good_idx, good_idx, b, t)*w(:,t,b);
-                    Poff = w(:,t,b)'*OFF.R(good_idx, good_idx, b)*w(:,t,b);
-                    SNR(t,b) = (Pon - Poff)/Poff;
-                    Senstmp(t,b) = 2*kB*SNR(t,b)./(flux_density(b)*1e-26);
+                    w(:,t,b) = OFF.R(good_idx, good_idx, bidx)\a(:,t,bidx);
+                    w(:,t,b) = w(:,t,b)./(w(:,t,b)'*a(:,t,bidx));
+                    Pon = w(:,t,b)'*R(good_idx, good_idx, bidx, t)*w(:,t,b);
+                    Poff = w(:,t,b)'*OFF.R(good_idx, good_idx, bidx)*w(:,t,b);
+                    SNR = (Pon - Poff)/Poff;
+                    Sens(t,b) = 2*kB*SNR./(flux_density(b)*1e-26);
                 else
-                    Senstmp(t,b) = 0;
+                    Sens(t,b) = 0;
                     w(:,t,b) = zeros(size(a,1),1);
                 end
+                bidx = bidx + 1;
             end
-            AZ = [AZ; az(t)];
-            EL = [EL; el(t)];
         end
-        Sens = [Sens; Senstmp];
+        AZ = az;
+        EL = el;
 
         if i == 1
             w_agg = w;
@@ -195,7 +210,7 @@ end
 % Plot map
 
 % Interpolated map
-Npoints = 100;
+Npoints = 200;
 % minX = -0.8;
 % maxX =  0.8;
 % minY = -0.3;
@@ -218,16 +233,20 @@ for b = 101:101 %Nbins
     colormap('jet');
     xlabel('Cross-Elevation Offset (degrees)');
     ylabel('Elevation Offset (degrees)');
-    title(sprintf('Formed Beam Sensitivity Map - %spol', pol));
+    title(sprintf('Formed Beam Sensitivity Map - %spol - %d', pol, b));
+    drawnow;
 end
 
 % Save figure
-fig_filename = sprintf('%s_%spol_map.png', session.session_name, pol);
-saveas(map_fig, fig_filename);
+fig_filename = sprintf('%s_%spol_map', session.session_name, pol);
+saveas(map_fig, sprintf('%s.png', fig_filename));
+saveas(map_fig, sprintf('%s.pdf', fig_filename));
+saveas(map_fig, sprintf('%s.eps', fig_filename));
+saveas(map_fig, sprintf('%s.fig', fig_filename), 'fig');
 
 % Get the angle of arrival for max sensitivity beam
-[s_max,max_idx] = max(Sens(:,101));
-Tsys_eta = Ap./(Sens(max_idx,:)*22.4./flux_density); % Remember to change when running again.
+[s_max,max_idx] = max(Sens(:,1));
+Tsys_eta = Ap./(Sens(max_idx,:));
 
 tsys_fig = figure();
 plot(freqs,real(Tsys_eta).');
@@ -237,8 +256,11 @@ ylabel('T_s_y_s/\eta_a_p (K)');
 grid on;
 
 % Save figure
-tsys_filename = sprintf('%s_%spol_tsys.png', session.session_name, pol);
-saveas(tsys_fig, tsys_filename);
+tsys_filename = sprintf('%s_%spol_tsys', session.session_name, pol);
+saveas(tsys_fig, sprintf('%s.png', tsys_filename));
+saveas(tsys_fig, sprintf('%s.pdf', tsys_filename));
+saveas(tsys_fig, sprintf('%s.eps', tsys_filename));
+saveas(tsys_fig, sprintf('%s.fig', tsys_filename), 'fig');
 
 toc;
 

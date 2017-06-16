@@ -8,22 +8,22 @@ source_table; % Found in kernel directory
 
 tic;
 
-pol = 'X';
+pol = 'Y';
 
 % % AGBT16B_400_01 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-session = AGBT16B_400_01;
-on_scans = [34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, ...
-            50, 65:70, 72, 74:78, 80:85];
-off_scans = [33, 36, 39, 42, 45, 48, 51, 64, ... 
-             71, 79];
-source = source3C295;
+% session = AGBT16B_400_01;
+% on_scans = [34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, ...
+%             50, 65:70, 72, 74:78, 80:85];
+% off_scans = [33, 36, 39, 42, 45, 48, 51, 64, ... 
+%              71, 79];
+% source = source3C295;
 
 % AGBT16B_400_02 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% session = AGBT16B_400_02;
-% on_scans = [13:15, 17:19, 21:23, 25:27, 29:31,...
-%             33:35, 37:39, 41:43, 45:47, 49:51, 53:55];
-% off_scans = [16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56];
-% source = source3C295;
+session = AGBT16B_400_02;
+on_scans = [13:15, 17:19, 21:23, 25:27, 29:31,...
+            33:35, 37:39, 41:43, 45:47, 49:51, 53:55];
+off_scans = [16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56];
+source = source3C295;
 
 % % AGBT16B_400_03 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % session = AGBT16B_400_03;
@@ -67,7 +67,7 @@ out_dir = sprintf('%s/mat', save_dir);
 mkdir(save_dir, out_dir);
 
 % Constants
-overwrite = 1;
+overwrite = 0;
 k = 0;
 kB = 1.38*1e-23;
 
@@ -164,7 +164,7 @@ for i = 1:length(on_tstamp)
     
     % Get steering vectors
     fprintf('     Obtaining steering vectors...\n');
-    a = get_steering_vectors(R, OFF.R, good_idx, bad_freqs, save_dir, tmp_stmp, pol, 0);
+    a = get_steering_vectors(R, OFF.R, good_idx, bad_freqs, save_dir, tmp_stmp, pol, 1);
     
     if i == 1
         a_agg = a;

@@ -1,4 +1,4 @@
-function [ R, my_az, my_el, info ] = aggregate_single_bank( save_dir, ant_dir, tstamp, bank, Nint )
+function [ R, my_az, my_el, xid, info ] = aggregate_single_bank( save_dir, ant_dir, tstamp, bank, Nint )
 %AGGREGATE_BANKS Collects all the BANK data into a single covariance matrix
 %variable
 %   Takes the data from dir/tstamp and finds banks A-T. Opens them,
@@ -69,10 +69,11 @@ function [ R, my_az, my_el, info ] = aggregate_single_bank( save_dir, ant_dir, t
         end
     else
         fprintf('File %s does not exist\n', filename);
-        R = 0;
-        my_az = 0;
-        my_el = 0;
-        info = 0;
+        R = [];
+        my_az = [];
+        my_el = [];
+        info = [];
+        xid = [];
     end
 
 end
