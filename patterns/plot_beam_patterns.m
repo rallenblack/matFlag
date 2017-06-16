@@ -11,7 +11,7 @@ scan_table; % Found in kernel directory
 
 % Desired session
 session = AGBT16B_400_02;
-pol = 'X';
+pol = 'Y';
 
 % Generate patterns
 [AZ, EL, patterns] = get_beamformed_patterns(session, pol);
