@@ -20,18 +20,18 @@ pol = 'Y';
 % GMST_off = GMST(off_scans);
 
 % AGBT16B_400_02 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% session = AGBT16B_400_02;
-% on_scans = [13:15, 17:19, 21:23, 25:27, 29:31,...
-%             33:35, 37:39, 41:43, 45:47, 49:51, 53:55];
-% off_scans = [16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56];
+session = AGBT16B_400_02;
+on_scans = [13:15, 17:19, 21:23, 25:27, 29:31,...
+            33:35, 37:39, 41:43, 45:47, 49:51, 53:55];
+off_scans = [16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56];
 % GMST = session.GMST;
 % GMST_on = GMST(on_scans);
 % GMST_off = GMST(off_scans);
 
 % % AGBT16B_400_03 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-session = AGBT16B_400_03;
-on_scans = [11:14, 16:18, 20:22, 24:26, 28:30, 32:34, 36:38, 40:42, 44:46, 48:50, 52:54];
-off_scans = [15, 19, 23, 27, 31, 35, 39, 43, 47, 51];
+% session = AGBT16B_400_03;
+% on_scans = [11:14, 16:18, 20:22, 24:26, 28:30, 32:34, 36:38, 40:42, 44:46, 48:50, 52:54];
+% off_scans = [15, 19, 23, 27, 31, 35, 39, 43, 47, 51];
 
 % % HI Source M101 - CALCORR
 % on_scans = 56;
@@ -186,34 +186,34 @@ for i = 1:length(on_tstamp)
     
     fprintf('     Calculating weights...\n');
     
-    if i == 5
+    if i == 13  % 14 for Session 3
         fprintf('i = %d\n', i);
         bm_idx = [1,30];
         for b = 1:size(R,3)
             w(:,1,b) = OFF.R(good_idx, good_idx, b)\a(:,bm_idx(1),b);
             w(:,2,b) = OFF.R(good_idx, good_idx, b)\a(:,bm_idx(2),b);
         end
-    elseif i == 13 
-        fprintf('i = %d\n', i);
-        bm_idx = 1;
-        for b = 1:size(R,3)
-            w(:,3,b) = OFF.R(good_idx, good_idx, b)\a(:,bm_idx,b);
-        end
-    elseif i == 14 
-        fprintf('i = %d\n', i);
-        bm_idx = 15;
-        for b = 1:size(R,3)
-            w(:,4,b) = OFF.R(good_idx, good_idx, b)\a(:,bm_idx,b);
-        end
-    elseif i == 15
+    elseif i == 18 % 16 for Session 3
         fprintf('i = %d\n', i);
         bm_idx = 30;
         for b = 1:size(R,3)
+            w(:,3,b) = OFF.R(good_idx, good_idx, b)\a(:,bm_idx,b);
+        end
+    elseif i == 19 % 17 for Session 3
+        fprintf('i = %d\n', i);
+        bm_idx = 17;
+        for b = 1:size(R,3)
+            w(:,4,b) = OFF.R(good_idx, good_idx, b)\a(:,bm_idx,b);
+        end
+    elseif i == 20 % 18 for Session 3
+        fprintf('i = %d\n', i);
+        bm_idx = 1;
+        for b = 1:size(R,3)
             w(:,5,b) = OFF.R(good_idx, good_idx, b)\a(:,bm_idx,b);
         end
-    elseif i == 20 
+    elseif i == 25 % 23 for Session 3
         fprintf('i = %d\n', i);
-        bm_idx = [30,1];
+        bm_idx = [1,30];
         for b = 1:size(R,3)
             w(:,6,b) = OFF.R(good_idx, good_idx, b)\a(:,bm_idx(1),b);
             w(:,7,b) = OFF.R(good_idx, good_idx, b)\a(:,bm_idx(2),b);
@@ -237,41 +237,76 @@ for beam = 1:Nbeam
     end
 end
 
-a_filename = sprintf('%s/%s_aggregated_grid_%s.mat', out_dir, session.session_name, pol);
-fprintf('Saving aggregated steering vectors to %s\n', a_filename);
-save(a_filename, 'AZ', 'EL', 'a_agg');
-
+%%
 % Plot map
 
 % Interpolated map
-Npoints = 80;
-minX = min(AZ);
-maxX = max(AZ);
+Npoints = 200;
+minX = session.Xdims(1); % min(AZ);
+maxX = session.Xdims(2); % max(AZ);
 minY = min(EL);
 maxY = max(EL);
 xval = linspace(minX, maxX, Npoints);
 yval = linspace(minY, maxY, Npoints);
 [X,Y] = meshgrid(linspace(minX,maxX,Npoints), linspace(minY,maxY,Npoints));
 map_fig = figure();
+
+% Beam subplot coordinates
+sub_pos = {[0.2+0.03+0.03,  0.65+0.00+0.0425, 0.20, 0.20],...
+           [0.5+0.00+0.03,  0.65+0.00+0.0425, 0.20, 0.20],...
+           [0.05+0.06+0.03, 0.35+0.02+0.0425, 0.20, 0.20],...
+           [0.35+0.03+0.03, 0.35+0.02+0.0425, 0.20, 0.20],...
+           [0.65+0.00+0.03, 0.35+0.02+0.0425, 0.20, 0.20],...
+           [0.2+0.03+0.03,  0.05+0.04+0.0425, 0.20, 0.20],...
+           [0.5+0.00+0.03,  0.05+0.04+0.0425, 0.20, 0.20]};
+
 fudge = session.fudge;
 for b = 101:101 %Nbins
     fprintf('Bin %d/%d\n', b, 500);
     for beam = 1:Nbeam
-        figure(beam+1);
-        Bq = griddata(AZ+fudge*EL, EL, 10*log10(squeeze(pattern(beam,:,b)./max(pattern(beam,:,b)))), X, Y);
+        % Create a subplot at a custom location
+        subplot('Position', sub_pos{beam});
+        
+        % Get the pattern using griddata
+        norm_pattern = 10*log10(squeeze(pattern(beam,:,b)./max(pattern(beam,:,b))));
+        Bq = griddata(AZ+fudge*EL, EL, norm_pattern, X, Y);
+        
+        % Plot the pattern
         imagesc(xval, yval, Bq);
-        colorbar;
-        set(gca, 'ydir', 'normal');
+        caxis([-40, 0]);
         colormap('jet');
-        xlabel('Right ascension');
-        ylabel('Declination');
-%         xlim([-0.28 0.26]);
-%         ylim([-0.17 0.27]);
-%         xlabel('Cross Elevation Offset (degrees)');
-%         ylabel('Elevation Offset (degrees)');
-        title(sprintf('Session 2: Beam %d at 1405 MHz', beam));
+        set(gca, 'ydir', 'normal');
+        
+        % Set the colorbar to be on the right-hand side of the figure
+        colorbar('Position', [0.91, 0.05, 0.03, 0.875], 'Limits', [-40, 0]);
+        
+        % Write the beam title
+        title(sprintf('Beam %d', beam), 'FontSize', 9);
+        
+        % Set the tick font size
+        set(gca, 'FontSize', 8);
+        
+        % Draw contours
+        hold on;
+        contour(xval,yval,Bq, [-10, -3], 'ShowText', 'on', 'LineColor', 'black');
+        hold off;
     end
 end
+
+% Create title
+ax1 = axes('Position', [0 0 1 1], 'Visible', 'off');
+my_title = sprintf('%s - %s-Polarization, %d MHz', session.session_name, pol, floor(freqs(b)));
+my_xlabel = 'Right Acesnsion (degrees)';
+my_ylabel = 'Declination (degrees)';
+text(0.5, 0.965, my_title, 'HorizontalAlignment', 'center', 'Units', 'normalized', 'FontSize', 12, 'FontWeight', 'bold');
+text(0.5, 0.05, my_xlabel, 'HorizontalAlignment', 'center', 'Units', 'normalized', 'FontSize', 10, 'FontWeight', 'bold');
+text(0.05, 0.5, my_ylabel, 'HorizontalAlignment', 'center', 'Units', 'normalized', 'FontSize', 10, 'FontWeight', 'bold', 'Rotation', 90);
+
+fig_filename = sprintf('pattern_plots/%s_%spol_formed_beams', session.session_name, pol);
+saveas(map_fig, sprintf('%s.png', fig_filename));
+saveas(map_fig, sprintf('%s.pdf', fig_filename));
+saveas(map_fig, sprintf('%s.eps', fig_filename));
+saveas(map_fig, sprintf('%s.fig', fig_filename), 'fig');
 
 
 toc;
