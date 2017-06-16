@@ -13,8 +13,13 @@ scan_table; % Found in kernel directory
 session = AGBT16B_400_02;
 pol = 'Y';
 
+% Beam locations
+beam_el = [52.23,  52.32, 52.1,  52.19, 52.28, 52.07, 52.19];
+beam_az = [212.7,  212.9, 212.7, 212.9, 213.1, 212.9, 213.1];
+
 % Generate patterns
-[AZ, EL, patterns] = get_beamformed_patterns(session, pol);
+[AZ, EL, patterns] = get_beamformed_patterns(session, pol,...
+                                             beam_el, beam_az);
 
 % Plot patterns
 map_fig = plot_hex(session, AZ, EL, patterns);

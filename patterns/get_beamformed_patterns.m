@@ -23,14 +23,9 @@ function [AZ, EL, patterns] = get_beamformed_patterns(session, pol, beam_az, bea
     end
     load(w_filename);
     
-    % Beam locations
-    % To be moved to input argument
-    beam_el = [52.23,  52.32, 52.1,  52.19, 52.28, 52.07, 52.19];
-    beam_az = [212.7,  212.9, 212.7, 212.9, 213.1, 212.9, 213.1];
-    Nbeam = length(beam_el);
-    
     % Get beam weights
     % Find closest AZ/EL for specified beam locations
+    Nbeam = length(beam_el);
     for beam = 1:Nbeam
         delta_el = (EL - beam_el(beam)).^2;
         delta_az = (AZ - beam_az(beam)).^2;
