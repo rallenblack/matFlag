@@ -11,8 +11,9 @@ function a = get_steering_vectors(Ron, Roff, good_idx, bad_freqs, save_dir, tmp_
         for t = 1:size(Ron,4)
             for b = 1:size(Ron,3)
                 if sum(bad_freqs == b) == 0
-                    [a(:,t,b), ~] = eigs(Ron(good_idx, good_idx, b, t),...
+                    [a(:,t,b), d] = eigs(Ron(good_idx, good_idx, b, t),...
                                          Roff(good_idx, good_idx, b), 1);
+                    a(:,t,b) = Roff(good_idx, good_idx, b)*a(:,t,b)*sqrt(d)/norm(a(:,t,b));
                 end
             end
         end
