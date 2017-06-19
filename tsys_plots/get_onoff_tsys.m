@@ -8,7 +8,7 @@ source_table; % Found in kernel directory
 
 tic;
 
-pol = 'X';
+pol = 'Y';
 
 % AGBT16B_400_01 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 session = AGBT16B_400_01;
@@ -223,7 +223,8 @@ el = zeros(7,1);
 create_weight_file(az, el, w_padded, w_padded,...
     sprintf('%s_scans%d_%d', session.session_name, on_scan, off_scan),...
     good_idx, good_idx,...
-    sprintf('%s/w_%s_scans%d_%d.bfw', save_dir, session.session_name, on_scan, off_scan));
+    sprintf('%s/w_%s_scans%d_%d_%spol.bfw', save_dir,...
+            session.session_name, on_scan, off_scan, pol));
 
 disp(min(real(Tsys_eta)));
 
