@@ -44,7 +44,7 @@ function create_weight_file(az, el, wX, wY, cal_filename, X_idx, Y_idx, filename
         % Create metadata for weight file
         offsets_el = el;
         offsets_az = az;
-        offsets = [offsets_el; offsets_az; offsets_el; offsets_az; offsets_el; offsets_az; offsets_el; offsets_az; offsets_el; offsets_az; offsets_el; offsets_az; offsets_el; offsets_az];
+        offsets = [offsets_el; offsets_az];
         offsets = offsets(:);
         to_skip1 = 64 - length(cal_filename);
         algorithm_name = 'Max Signal-to-Noise Ratio';
