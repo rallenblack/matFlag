@@ -67,7 +67,7 @@ out_dir = sprintf('%s/mat', save_dir);
 mkdir(save_dir, out_dir);
 
 % Constants
-overwrite = 0;
+overwrite = 1;
 k = 0;
 kB = 1.38*1e-23;
 
@@ -250,6 +250,7 @@ saveas(map_fig, sprintf('%s.fig', fig_filename), 'fig');
 [s_max,max_idx] = max(Sens(:,101));
 % Tsys_eta = Ap./(Sens(max_idx,:)*22.4./flux_density); % Remember to change when running again.
 Tsys_eta = Ap./(Sens(max_idx,:));
+Tsys_eta(Tsys_eta > 200) = NaN;
 
 tsys_fig = figure();
 plot(freqs,real(Tsys_eta).');

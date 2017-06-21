@@ -11,16 +11,16 @@ tic;
 pol = 'Y';
 
 % % AGBT16B_400_04 Daisy %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% session = AGBT16B_400_04;
-% on_scans = 22;
-% off_scans = [21, 23];
-% source = source3C295;
-
-% % AGBT16B_400_05 Daisy %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-session = AGBT16B_400_05;
+session = AGBT16B_400_04;
 on_scans = 22;
 off_scans = [21, 23];
-source = source3C147;
+source = source3C295;
+
+% % AGBT16B_400_05 Daisy %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% session = AGBT16B_400_05;
+% on_scans = 22;
+% off_scans = [21, 23];
+% source = source3C147;
 
 on_tstamp = session.scans(on_scans);
 off_tstamp = session.scans(off_scans);
@@ -37,7 +37,7 @@ out_dir = sprintf('%s/mat', save_dir);
 mkdir(save_dir, out_dir);
 
 % Constants
-overwrite = 0;
+overwrite = 1;
 k = 0;
 kB = 1.38*1e-23;
 
@@ -117,7 +117,7 @@ for bank = 1:length(banks)
 
         % Extract data and save
         if ~exist(filename, 'file') || overwrite == 1
-            [R, az, el, xid, info] = aggregate_single_bank(save_dir, ant_dir, tmp_stmp, banks{bank}, 4);
+            [R, az, el, xid, info] = aggregate_single_bank(save_dir, ant_dir, tmp_stmp, banks{bank}, 10);
             if isempty(R) && isempty(az) && isempty(el) && isempty(info)
                 fprintf('Skipping\n');
                 continue;
@@ -165,7 +165,7 @@ for bank = 1:length(banks)
 
         % Get steering vectors
         fprintf('     Obtaining steering vectors...\n');
-        a = get_steering_vectors_single_bank(R, OFF.R, good_idx, xid, bad_freqs, save_dir, tmp_stmp, pol, 0);
+        a = get_steering_vectors_single_bank(R, OFF.R, good_idx, xid, bad_freqs, save_dir, tmp_stmp, pol, 1);
 
         a_agg = a;
         w = zeros(size(a,1), size(a,2), 500);

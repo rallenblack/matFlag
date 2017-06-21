@@ -6,7 +6,8 @@ scan_table; % Found in kernel directory
 source_table; % Found in kernel directory
 onoff_table; % Found in local directory
 
-for i = 1:size(onoffs, 1)
+%for i = 1:size(onoffs, 1)
+for i = 5:5
     session  = onoffs{i,1};
     on_scan  = onoffs{i,2};
     off_scan = onoffs{i,3};

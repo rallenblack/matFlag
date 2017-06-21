@@ -24,7 +24,7 @@ for pol_idx = 1:2
     % Get beam weights
     beam_az = session.beam_az;
     beam_el = session.beam_el;
-    w = get_grid_weights(session, pol, beam_az, beam_el);
+    [w, w_az, w_el] = get_grid_weights(session, pol, beam_az, beam_el);
 
     % Generate patterns
     [AZ, EL, patterns] = get_beamformed_patterns(session, pol, w);
@@ -59,3 +59,8 @@ for pol_idx = 1:2
     saveas(map_fig, sprintf('%s.eps', fig_filename));
     saveas(map_fig, sprintf('%s.fig', fig_filename), 'fig');
 end
+
+% Save weights to file
+rtbf_filename = sprintf('%s/%s/BF/weights_%s.bin', data_root,...
+    session.session_name, session.session_name);
+create_weight_file(w_az, w_el, w, session.session_name, rtbf_filename);

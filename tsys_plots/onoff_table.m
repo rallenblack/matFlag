@@ -1,3 +1,6 @@
+source_table;
+scan_table;
+
 onoffs = {};
 idx = 1;
 

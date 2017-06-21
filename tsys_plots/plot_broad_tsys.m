@@ -12,13 +12,13 @@ scans = {[6,7],...
          [12,13],...
          [14,15],...
          [16,17]};
-pol = 'X';
+pol = 'Y';
 
 raw_fig = figure();
 pruned_fig = figure();
 
 for scan = 1:length(scans)
-    filename = sprintf('%s_scans%d_%d_%spol_tsys.mat',...
+    filename = sprintf('figures/%s_scans%d_%d_%spol_tsys.mat',...
         session.session_name, scans{scan}(1), scans{scan}(2), pol);
     
     load(filename);
@@ -41,7 +41,7 @@ for scan = 1:length(scans)
     Tsys_eta(Tsys_eta == Inf) = NaN;
     mu = mean(real(Tsys_eta), 'omitnan');
     sigma = std(real(Tsys_eta) - mu, 'omitnan');
-    Tsys_eta(abs(Tsys_eta - mu) > sigma) = NaN;
+    Tsys_eta(abs(Tsys_eta - mu) > 2*sigma) = NaN;
     
     % Plot pruned data
     figure(pruned_fig);
@@ -53,3 +53,26 @@ for scan = 1:length(scans)
     grid on;
     hold off;
 end
+
+figure(raw_fig);
+xlim([1000, 1725]);
+ylim([25, 100]);
+grid minor;
+figure(pruned_fig);
+xlim([1000, 1725]);
+ylim([25, 100]);
+grid minor;
+
+fig_filename = sprintf('figures/%s_broadband_%spol_tsys',...
+        session.session_name, pol);
+saveas(raw_fig, sprintf('%s.png', fig_filename));
+saveas(raw_fig, sprintf('%s.pdf', fig_filename));
+saveas(raw_fig, sprintf('%s.eps', fig_filename));
+saveas(raw_fig, sprintf('%s.fig', fig_filename), 'fig');
+
+fig_filename = sprintf('figures/%s_broadband_pruned_%spol_tsys',...
+        session.session_name, pol);
+saveas(pruned_fig, sprintf('%s.png', fig_filename));
+saveas(pruned_fig, sprintf('%s.pdf', fig_filename));
+saveas(pruned_fig, sprintf('%s.eps', fig_filename));
+saveas(pruned_fig, sprintf('%s.fig', fig_filename), 'fig');

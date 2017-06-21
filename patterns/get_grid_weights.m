@@ -1,4 +1,4 @@
-function w = get_grid_weights(session, pol, beam_az, beam_el)
+function [w, w_az, w_el] = get_grid_weights(session, pol, beam_az, beam_el)
 
     % Load scan table
     scan_table;
@@ -26,4 +26,6 @@ function w = get_grid_weights(session, pol, beam_az, beam_el)
     end
 
     w = w_agg(:,beam_idx,:);
+    w_az = AZ(beam_idx);
+    w_el = EL(beam_idx);
 end
