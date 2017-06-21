@@ -50,7 +50,7 @@ function [ R, my_az, my_el, info ] = aggregate_banks( save_dir, ant_dir, tstamp,
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Extract antenna positions for scan
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    disp('Extracting antenna positions and computing offsets');
+    disp('      Extracting antenna positions and computing offsets');
 
     % Extract offsets
     % ant_dir = '/home/gbtdata/AGBT16B_400_05/Antenna';
@@ -61,7 +61,7 @@ function [ R, my_az, my_el, info ] = aggregate_banks( save_dir, ant_dir, tstamp,
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Associate offsets with correlation matrices
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    disp('Associating pointing offsets with correlation matrices');
+    disp('      Associating pointing offsets with correlation matrices');
     Ntime = size(R, 4);
     my_el  = zeros(Ntime, 1);
     my_az  = zeros(Ntime, 1);

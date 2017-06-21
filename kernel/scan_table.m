@@ -98,6 +98,9 @@ AGBT16B_400_02.on_scans = [13:15, 17:19, 21:23, 25:27, 29:31,...
                            33:35, 37:39, 41:43, 45:47, 49:51, 53:55];
 AGBT16B_400_02.off_scans = [16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56];
 
+AGBT16B_400_02.beam_el = [52.23, 52.32, 52.1,  52.19, 52.28, 52.07, 52.19];
+AGBT16B_400_02.beam_az = [212.7, 212.9, 212.7, 212.9, 213.1, 212.9, 213.1];
+
 %% AGBT16B_400_03
 AGBT16B_400_03.session_name = 'AGBT16B_400_03';
 log_filename = sprintf('%s/%s_03/ScanLog.fits', meta_root, proj_id);
@@ -171,6 +174,8 @@ AGBT16B_400_04.goodX = goodX;
 AGBT16B_400_04.goodY = goodY;
 
 AGBT16B_400_04.fudge = 0;
+AGBT16B_400_04.Xdims = [212.4, 213.3];
+AGBT16B_400_04.Ydims = [51.9, 52.5];
 
 AGBT16B_400_04.on_scans = 22;
 AGBT16B_400_04.off_scans = [21, 23];
@@ -212,3 +217,6 @@ AGBT16B_400_05.fudge = 0;
 
 AGBT16B_400_05.on_scans = 24;
 AGBT16B_400_05.off_scans = [23, 25];
+
+AGBT16B_400_05.Xdims = [85.25, 86.05];
+AGBT16B_400_05.Ydims = [49.6, 50.1];

@@ -8,22 +8,22 @@ source_table; % Found in kernel directory
 
 tic;
 
-pol = 'X';
+pol = 'Y';
 
 % % AGBT16B_400_01 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-session = AGBT16B_400_01;
-on_scans = [34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, ...
-            50, 65:70, 72, 74:78, 80:85];
-off_scans = [33, 36, 39, 42, 45, 48, 51, 64, ... 
-             71, 79];
-source = source3C295;
+% session = AGBT16B_400_01;
+% on_scans = [34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, ...
+%             50, 65:70, 72, 74:78, 80:85];
+% off_scans = [33, 36, 39, 42, 45, 48, 51, 64, ... 
+%              71, 79];
+% source = source3C295;
 
 % AGBT16B_400_02 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% session = AGBT16B_400_02;
-% on_scans = [13:15, 17:19, 21:23, 25:27, 29:31,...
-%             33:35, 37:39, 41:43, 45:47, 49:51, 53:55];
-% off_scans = [16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56];
-% source = source3C295;
+session = AGBT16B_400_02;
+on_scans = [13:15, 17:19, 21:23, 25:27, 29:31,...
+            33:35, 37:39, 41:43, 45:47, 49:51, 53:55];
+off_scans = [16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56];
+source = source3C295;
 
 % % AGBT16B_400_03 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % session = AGBT16B_400_03;
@@ -164,7 +164,7 @@ for i = 1:length(on_tstamp)
     
     % Get steering vectors
     fprintf('     Obtaining steering vectors...\n');
-    a = get_steering_vectors(R, OFF.R, good_idx, bad_freqs, save_dir, tmp_stmp, pol, 0);
+    a = get_steering_vectors(R, OFF.R, good_idx, bad_freqs, save_dir, tmp_stmp, pol, 1);
     
     if i == 1
         a_agg = a;
@@ -250,6 +250,7 @@ saveas(map_fig, sprintf('%s.fig', fig_filename), 'fig');
 [s_max,max_idx] = max(Sens(:,101));
 % Tsys_eta = Ap./(Sens(max_idx,:)*22.4./flux_density); % Remember to change when running again.
 Tsys_eta = Ap./(Sens(max_idx,:));
+Tsys_eta(Tsys_eta > 200) = NaN;
 
 tsys_fig = figure();
 plot(freqs,real(Tsys_eta).');
