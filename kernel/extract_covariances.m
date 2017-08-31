@@ -4,7 +4,7 @@ function [ R, dmjd, xid, info ] = extract_covariances( fits_filename )
 
     info   = fitsinfo(fits_filename);
     bintbl = fitsread(fits_filename, 'binarytable', 1);
-    
+
     dmjd = bintbl{1};
     mcnt = bintbl{2};
     if length(bintbl) == 3
@@ -73,15 +73,15 @@ function [ R ] = reconstruct_covariances_bdj( data, Nele, Nbin, Nsamp )
 %   Do this for each STI time and each freq. channel
 %
     for t = 1:Ncov
-        if mod(t,100) == 0
-            %fprintf('Reconstructing Row %d/%d\n', t, Ncov);
-        end
+        data_t = data(t,:);
         for b = 1:Nbin
             b_off = Nbaselines_tot*(b-1)+1;
-            rb = [data(t, b_off:b_off + Nbaselines_tot-1),0];
+            tmp_data = data_t(b_off:b_off+Nbaselines_tot-1);
+            rb = [tmp_data,0];
             Rb = reshape(rb(RIdx),Nele,Nele);             
             tmp = Rb + (Rb' - diag(diag(Rb'))); % Exploit symmetry
             tmp = tmp./(Nsamp - 1);
+            
             R(:,:,b,t) = tmp;
         end
     end
