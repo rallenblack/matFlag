@@ -8,12 +8,17 @@ function a = get_steering_vectors(Ron, Roff, good_idx, bad_freqs, save_dir, tmp_
         Npoints = size(Ron,4);
         Nbins = size(Ron,3);
         a = zeros(Nele, Npoints, Nbins);
-        for t = 1:size(Ron,4)
-            for b = 1:size(Ron,3)
+        Ron1 = Ron(good_idx, good_idx, :, :);
+        Roff1 = Roff(good_idx, good_idx, :);
+        for t = 1:Npoints
+            for b = 1:Nbins
                 if sum(bad_freqs == b) == 0
-                    [a(:,t,b), d] = eigs(Ron(good_idx, good_idx, b, t),...
-                                         Roff(good_idx, good_idx, b), 1);
-                    a(:,t,b) = Roff(good_idx, good_idx, b)*a(:,t,b)*sqrt(d)/norm(a(:,t,b));
+                    Ron2  = (Ron1 (:,:,b,t) + Ron1 (:,:,b,t)')/2;
+                    Roff2 = (Roff1(:,:,b)   + Roff1(:,:,b)'  )/2;
+                    [V, e] = eig(Ron2, Roff2, 'vector');
+                    [d, idx] = max(e);
+                    v = V(:,idx);
+                    a(:,t,b) = Roff2*v*sqrt(d)/norm(v);
                 end
             end
         end

@@ -10,10 +10,16 @@ function create_weight_file(az, el, wX, wY, cal_filename, X_idx, Y_idx, filename
     N_bin = 25;
     N_pol = 2;
     
-    w_padded = zeros(N_ele, N_beam, N_pol, N_bin_total);
-    w_padded(X_idx,:,1,:) = wX;
-    w_padded(Y_idx,:,2,:) = wY;
+%     w_padded = zeros(N_ele, N_beam, N_pol, N_bin_total);
+%     w_padded(X_idx,:,1,:) = wX;
+%     w_padded(Y_idx,:,2,:) = wY;
 
+    w_padded = zeros(N_ele, N_bin_total, N_beam, N_pol);
+    for i = 1:N_bin_total
+        w_padded(X_idx,i,:,1) = wX(:,:,i);
+        w_padded(Y_idx,i,:,2) = wY(:,:,i);
+    end
+    
     % Save data into weight file formatted for RTBF code
     banks = {'A', 'B', 'C', 'D',...
         'E', 'F', 'G', 'H',...
@@ -27,10 +33,16 @@ function create_weight_file(az, el, wX, wY, cal_filename, X_idx, Y_idx, filename
     for b = 1:length(banks)
         % Get bank name
         bank_name = banks{b};
-
+        
         % Extract channels for bank
-        w1 = w_padded(:,:,:,chan_idx+5*(b-1));
-
+        % w1 = w_padded(:,:,:,chan_idx+5*(b-1));
+        w1 = w_padded(:,chan_idx+5*(b-1),:,:);
+        
+        %%% Just for testing - Used .mat file to verify that the .bin file was
+        %%% the same
+        % wp_filename = strrep(filename, '.bin', sprintf('_%s.mat',bank_name));
+        % save(wp_filename, 'w1');
+        
         % Reshape for file format
         w2 = reshape(w1, N_ele*N_bin, N_beam*N_pol);
         w_real = real(w2(:));
@@ -44,7 +56,7 @@ function create_weight_file(az, el, wX, wY, cal_filename, X_idx, Y_idx, filename
         % Create metadata for weight file
         offsets_el = el;
         offsets_az = az;
-        offsets = [offsets_el; offsets_az];
+        offsets = [offsets_el, offsets_az].';
         offsets = offsets(:);
         to_skip1 = 64 - length(cal_filename);
         algorithm_name = 'Max Signal-to-Noise Ratio';
