@@ -42,6 +42,7 @@ function map_fig = plot_hex(session, AZ, EL, patterns)
         caxis([-40, 0]);
         colormap('jet');
         set(gca, 'ydir', 'normal');
+        axis square;
 
         % Set the colorbar to be on the right-hand side of the figure
         colorbar('Position', [0.91, 0.05, 0.03, 0.875], 'Limits', [-40, 0]);
