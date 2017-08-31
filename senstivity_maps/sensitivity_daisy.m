@@ -8,7 +8,7 @@ source_table; % Found in kernel directory
 
 tic;
 
-pol = 'Y';
+pol = 'X';
 
 % % AGBT16B_400_04 Daisy %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 session = AGBT16B_400_04;
@@ -167,7 +167,7 @@ for bank = 1:length(banks)
         fprintf('     Obtaining steering vectors...\n');
         a = get_steering_vectors_single_bank(R, OFF.R, good_idx, xid, bad_freqs, save_dir, tmp_stmp, pol, 1);
 
-        a_agg = a;
+%         a_agg = a;
         w = zeros(size(a,1), size(a,2), 500);
 
         fprintf('     Calculating weights and sensitivity...\n');
@@ -192,20 +192,39 @@ for bank = 1:length(banks)
         EL = el;
 
         if i == 1
-            w_agg = w;
+            w_agg_tmp = w;
+            a_agg_tmp = a;
         else
             % Append to aggregated steering vector matrix
-            w_agg = cat(2, w_agg, w);
+            w_agg_tmp = cat(2, w_agg_tmp, w);
+            a_agg_tmp = cat(2, a_agg_tmp, a);
         end
     end
-    a_filename = sprintf('%s/%s_aggregated_grid_%s_%s.mat', out_dir, session.session_name, pol, banks{bank});
-    fprintf('Saving aggregated steering vectors to %s\n', a_filename);
-    save(a_filename, 'AZ', 'EL', 'a_agg');
-
-    w_filename = sprintf('%s/%s_aggregated_weights_%s_%s.mat', out_dir, session.session_name, pol, banks{bank});
-    fprintf('Saving aggregated weight vectors to %s\n', w_filename);
-    save(w_filename, 'AZ', 'EL', 'w_agg');
+    
+    % Combine all banks (non-contiguous channels)
+    w_agg(:,:,chans) = w_agg_tmp(:,:,chans);
+    a_agg(:,:,chans) = a_agg_tmp;
+    
+%     a_filename = sprintf('%s/%s_aggregated_grid_%s_%s.mat', out_dir, session.session_name, pol, banks{bank});
+%     fprintf('Saving aggregated steering vectors to %s\n', a_filename);
+%     save(a_filename, 'AZ', 'EL', 'a_agg');
+% 
+%     w_filename = sprintf('%s/%s_aggregated_weights_%s_%s.mat', out_dir, session.session_name, pol, banks{bank});
+%     fprintf('Saving aggregated weight vectors to %s\n', w_filename);
+%     save(w_filename, 'AZ', 'EL', 'w_agg');
 end
+
+cat_zeros = 20; % Concatenate with zeros for the last 20 frequency channels of Q,R,S & T
+a_banks = cat(3, a_banks, zeros(size(a_banks,1),size(a_banks,2),cat_zeros));
+a_filename = sprintf('%s/%s_aggregated_grid_%s.mat', out_dir, session.session_name, pol);
+fprintf('Saving aggregated steering vectors to %s\n', a_filename);
+save(a_filename, 'AZ', 'EL', 'a_agg');
+
+w_banks = cat(3, w_banks, zeros(size(w_banks,1),size(w_banks,2),cat_zeros));
+w_filename = sprintf('%s/%s_aggregated_weights_%s.mat', out_dir, session.session_name, pol);
+fprintf('Saving aggregated weight vectors to %s\n', w_filename);
+save(w_filename, 'AZ', 'EL', 'w_agg');
+
 
 % Plot map
 
@@ -224,7 +243,7 @@ yval = linspace(minY, maxY, Npoints);
 [X,Y] = meshgrid(linspace(minX,maxX,Npoints), linspace(minY,maxY,Npoints));
 map_fig = figure();
 fudge = session.fudge;
-for b = 101:101 %Nbins
+for b = 101:101 % Nbins
     fprintf('Bin %d/%d\n', b, 500);
     Sq = griddata(AZ + fudge*EL, EL, real(squeeze(Sens(:,b))), X, Y);
     imagesc(xval, yval, Sq);
