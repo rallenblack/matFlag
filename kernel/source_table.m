@@ -22,3 +22,12 @@ source3C147.c = -0.201;
 source3C147.d = -0.064;
 source3C147.e = -0.046;
 source3C147.f = 0.029;
+
+source3C123.name = '3C123';
+source3C123.a = 1.8017;
+source3C123.b = -0.7884;
+source3C123.c = -0.1035;
+source3C123.d = -0.0248;
+source3C123.e = -0.090;
+source3C123.f = 0;
+
