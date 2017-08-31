@@ -1,4 +1,4 @@
-function [Tsys_etaX, Tsys_etaY, freqs, wX, wY] = get_onoff_tsys(session, on_scan, off_scan, source, LO_freq);
+function [Tsys_etaX, Tsys_etaY, freqs, wX, wY] = get_onoff_tsys(session, on_scan, off_scan, source, LO_freq)
     % On/Off Tsys
 
     addpath ../kernel/
@@ -62,7 +62,7 @@ function [Tsys_etaX, Tsys_etaY, freqs, wX, wY] = get_onoff_tsys(session, on_scan
 
         % Extract data and save
         if ~exist(filename, 'file') || overwrite == 1
-            [R, az_tmp, el_tmp, ~] = aggregate_banks(save_dir, ant_dir, tmp_stmp, -1);
+            [R, az_tmp, el_tmp, ~] = aggregate_banks(save_dir, ant_dir, tmp_stmp, 1, -1);
 
             % Off pointings are dwell scans; need single R, az, and el
             az = mean(az_tmp);
@@ -86,7 +86,7 @@ function [Tsys_etaX, Tsys_etaY, freqs, wX, wY] = get_onoff_tsys(session, on_scan
 
         % Extract data and save
         if ~exist(filename, 'file') || overwrite == 1
-            [R, az, el, info] = aggregate_banks(save_dir, ant_dir, tmp_stmp, -1);
+            [R, az, el, info] = aggregate_banks(save_dir, ant_dir, tmp_stmp, 1, -1);
             save(filename, 'R', 'az', 'el');
         else
             load(filename);
