@@ -5,8 +5,12 @@ clearvars;
 addpath ../kernel/
 scan_table; % Found in kernel directory
 
-session = AGBT16B_400_03;
-pol = 'X';
+session = AGBT16B_400_12;
+pol = 'Y';
+note = 'grid';
+
+LO_freq = 1450;
+freqs = ((-249:250)*303.75e-3) + LO_freq;
 
 % Extract polarization indexing information
 if pol == 'X'
@@ -21,26 +25,39 @@ Nele = length(ele);
 
 % Load in steering vectors
 out_dir = sprintf('%s/%s/BF/mat', data_root, session.session_name);
-filename = sprintf('%s/%s_aggregated_grid_%s.mat', out_dir, session.session_name, pol);
+filename = sprintf('%s/%s_aggregated_grid_%s_%s.mat', out_dir, session.session_name, pol, note);
 
 load(filename);
+
+% Load in Tsys values
+tsys_filename = sprintf('%s/%s_%spol_tsys_%s.mat', out_dir,session.session_name, pol, note);
+TSYS = load(tsys_filename);
 
 % Iterate over elements and steering vectors
 patterns = zeros(size(a_agg,2), Nele, size(a_agg,3));
 for e = 1:Nele
+    e_idx = ele(e);
     fprintf('Processing element %d\n', e);
     w = zeros(Nele, 1);
     w(e) = 1;
     for i = 1:size(a_agg,2)
-        for b = 1:size(a_agg,3)
-            % Zero insert for bad elements
-            a = zeros(40, 1);
-            a(good_idx) = a_agg(:,i,b);
-            a = a(ele);
-            patterns(i,e,b) = abs(w'*a)^2;
+        %for b = 1:size(a_agg,3)
+        for b = 101:101
+            if (TSYS.Tsys_eta(i,b) > 400)
+                % Force low-sensitivity areas to NaN
+                patterns(i,e,b) = NaN;
+            else
+                % Zero insert for bad elements
+                a = zeros(40, 1);
+                a(good_idx) = a_agg(:,i,b);
+                a = a(ele);
+                patterns(i,e,b) = abs(w'*a)^2;
+            end
         end
     end
 end
+
+
 
 % Normalize patterns to peak
 for e = 1:Nele
@@ -67,12 +84,30 @@ for e = 1:Nele %Nele
         Sq = griddata(AZ+fudge*EL, EL, real(squeeze(10*log10(patterns(:,e,b)))), X, Y);
         imagesc(xval, yval, Sq);
         set(gca, 'ydir', 'normal');
+        set(gca, 'clim', [-40, 0]);
         colormap('jet');
-        xlabel('Xel');
-        ylabel('El');
-        title(sprintf('%d%s', e, pol));
+        title(sprintf('%d%s', e, pol), 'fontsize', 8);
+        
+        hold on;
+        contour(xval,yval,Sq, [-3, -3], 'ShowText', 'on', 'LineColor', 'black');
+        hold off;
+        
+        % Set the colorbar to be on the right-hand side of the figure
+        colorbar('Position', [0.92, 0.05, 0.02, 0.875], 'Limits', [-40, 0]);
     end
 end
+ax1 = axes('Position', [0 0 1 1], 'Visible', 'off');
+my_title = sprintf('Element Patterns - %s-Polarization, %d MHz', pol, floor(freqs(b)));
+my_title = strrep(my_title, '_', '\_');
+text(0.5, 0.965, my_title, 'HorizontalAlignment', 'center', 'Units', 'normalized', 'FontSize', 12, 'FontWeight', 'bold');
+
+% Create x label
+my_xlabel = 'Cross-Elevation (degrees)'; % Right Ascension (degrees) for session 1 and 4
+text(0.5, 0.05, my_xlabel, 'HorizontalAlignment', 'center', 'Units', 'normalized', 'FontSize', 12, 'FontWeight', 'bold');
+
+% Create y label
+my_ylabel = 'Elevation (degrees)'; % Declination (degrees) for session 1 and 4
+text(0.05, 0.5, my_ylabel, 'HorizontalAlignment', 'center', 'Units', 'normalized', 'FontSize', 12, 'FontWeight', 'bold', 'Rotation', 90);
 
 % Save figure
 fig_filename = sprintf('%s_%spol_elem_patterns', session.session_name, pol);
