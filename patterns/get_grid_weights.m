@@ -1,4 +1,4 @@
-function [w, w_az, w_el] = get_grid_weights(session, pol, beam_az, beam_el)
+function [w, w_az, w_el] = get_grid_weights(session, pol, beam_az, beam_el, note)
 
     % Load scan table
     scan_table;
@@ -8,8 +8,8 @@ function [w, w_az, w_el] = get_grid_weights(session, pol, beam_az, beam_el)
 
     % Load in weights
     out_dir = sprintf('%s/%s/BF/mat', data_root, session.session_name);
-    w_filename = sprintf('%s/%s_aggregated_weights_%s.mat', out_dir,...
-        session.session_name, pol);
+    w_filename = sprintf('%s/%s_aggregated_weights_%s_%s.mat', out_dir,...
+        session.session_name, pol, note);
     if ~exist(w_filename, 'file')
         error(sprintf('The weight vectors file %s does not exist!\n',...
             w_filename));
@@ -26,6 +26,7 @@ function [w, w_az, w_el] = get_grid_weights(session, pol, beam_az, beam_el)
     end
 
     w = w_agg(:,beam_idx,:);
+%     w = w_banks(:,beam_idx,:);
     w_az = AZ(beam_idx);
     w_el = EL(beam_idx);
 end
