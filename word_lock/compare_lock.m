@@ -1,5 +1,6 @@
 % Coherent Noise Word Lock
-close all; clearvars;
+%close all;
+clearvars;
 
 % Add kernel codes to path
 addpath ../kernel/
@@ -10,7 +11,7 @@ proj_id = '/TMP';
 session = '/BF/';
 
 % scan time
-tstamp = '2017_07_27_21:45:59';
+tstamp = '2018_02_07_13:03:11';
 
 % system parameters
 Nele = 40;                             % Antenna Elements
@@ -42,6 +43,6 @@ end
 R(:,:,[1:10, 248:252, 490:499]) = 0;
 
 % compute delays relative to first element to determine max delay
-ref_el = 24;
+ref_el = 19;
 tmp_delta_n = compute_delay(R, freqs, fs, ref_el);
 round(tmp_delta_n)

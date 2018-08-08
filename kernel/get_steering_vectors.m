@@ -18,7 +18,9 @@ function a = get_steering_vectors(Ron, Roff, good_idx, bad_freqs, save_dir, tmp_
                     [V, e] = eig(Ron2, Roff2, 'vector');
                     [d, idx] = max(e);
                     v = V(:,idx);
-                    a(:,t,b) = Roff2*v*sqrt(d)/norm(v);
+%                     a(:,t,b) = Roff2*v*sqrt(d)/norm(v);
+                    a(:,t,b) = Roff2*v;
+                    a(:,t,b) = a(:,t,b)./norm(a(:,t,b)); % New addition, comment if there are any issues.
                 end
             end
         end

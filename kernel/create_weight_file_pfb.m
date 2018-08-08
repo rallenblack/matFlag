@@ -1,4 +1,4 @@
-function create_weight_file(az, el, wX, wY, cal_filename, X_idx, Y_idx, filename)
+function create_weight_file_pfb(az, el, wX, wY, cal_filename, X_idx, Y_idx, filename)
 
     % Simple script that saves the weights to a RTBF-compatible set of
     % files
@@ -6,8 +6,8 @@ function create_weight_file(az, el, wX, wY, cal_filename, X_idx, Y_idx, filename
     % Reshape weights
     N_beam = size(wX,2);
     N_ele = 64;
-    N_bin_total = 500;
-    N_bin = 25;
+    N_bin_total = 3200;
+    N_bin = 160;
     N_pol = 2;
     
 %     w_padded = zeros(N_ele, N_beam, N_pol, N_bin_total);
@@ -28,15 +28,15 @@ function create_weight_file(az, el, wX, wY, cal_filename, X_idx, Y_idx, filename
         'Q', 'R', 'S', 'T'};
 
     interleaved_w = zeros(2*N_ele*N_bin*N_beam*N_pol,1);
-    chan_idx = [1:5, 101:105, 201:205, 301:305, 401:405];
+%     chan_idx = [1:5, 101:105, 201:205, 301:305, 401:405];
 
     for b = 1:length(banks)
         % Get bank name
         bank_name = banks{b};
         
         % Extract channels for bank
-        % w1 = w_padded(:,:,:,chan_idx+5*(b-1));
-        w1 = w_padded(:,chan_idx+5*(b-1),:,:);
+%         w1 = w_padded(:,chan_idx+5*(b-1),:,:);
+        w1 = w_padded(:,N_bin*(b-1)+1:N_bin*b,:,:);
         
         %%% Just for testing - Used .mat file to verify that the .bin file was
         %%% the same
@@ -56,7 +56,7 @@ function create_weight_file(az, el, wX, wY, cal_filename, X_idx, Y_idx, filename
         % Create metadata for weight file
         offsets_el = el;
         offsets_az = az;
-        offsets = [offsets_el, offsets_az].';
+        offsets = [offsets_el; offsets_az];
         offsets = offsets(:);
         to_skip1 = 64 - length(cal_filename);
         algorithm_name = 'Max Signal-to-Noise Ratio';

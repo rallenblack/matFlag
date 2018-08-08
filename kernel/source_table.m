@@ -15,6 +15,14 @@ source3C48.d = -0.0498;
 source3C48.e = 0;
 source3C48.f = 0;
 
+source3C348.name = '3C348';
+source3C348.a = 1.835;
+source3C348.b = -1.08;
+source3C348.c = -0.09;
+source3C348.d = -0.14;
+source3C348.e = -0.06;
+source3C348.f = 0.06;
+
 source3C147.name = '3C147';
 source3C147.a = 1.4516;
 source3C147.b = -0.6961;

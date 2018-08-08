@@ -31,7 +31,7 @@ function [Tsys_etaX, Tsys_etaY, freqs, wX, wY] = get_onoff_tsys(session, on_scan
         [~, ~, ~] = mkdir(save_dir, out_dir);
 
         % Constants
-        overwrite = 1;
+        overwrite = 0;
         kB = 1.38*1e-23;
 
         rad = 50;
@@ -47,7 +47,7 @@ function [Tsys_etaX, Tsys_etaY, freqs, wX, wY] = get_onoff_tsys(session, on_scan
         x = a + b*log10(freqs./1e3) + c*log10(freqs./1e3).^2 + d*log10(freqs./1e3).^3 + e*log10(freqs./1e3).^4 + f*log10(freqs./1e3).^5;
         flux_density = 10.^x;
 
-        ant_dir = sprintf('%s/%s/Antenna', meta_root, proj_str);
+        ant_dir = sprintf('%s/%s/Antenna', meta_root1, proj_str);
 
         % Iterate over off pointings just to have them ready
         % Iterate over on pointings and look for closest off pointing

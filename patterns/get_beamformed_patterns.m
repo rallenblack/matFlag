@@ -62,7 +62,7 @@ function [AZ, EL, patterns] = get_beamformed_patterns(session, pol, note, w)
     % Normalize patterns to peak
     for beam = 1:Nbeam
         for b= 1:size(a_agg,3)
-            patterns(:,beam,b) = patterns(:,beam,b)./max(patterns(:,beam,b));
+            patterns(beam,:,b) = patterns(beam,:,b)./max(patterns(beam,:,b));
         end
     end
 end

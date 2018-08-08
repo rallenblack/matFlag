@@ -14,10 +14,10 @@ addpath ../kernel/
 scan_table; % Found in kernel directory
 source_table; % Found in kernel directory
 
-tic;
+% tic;
 
 quick_map = 0;
-overwrite = 1;
+overwrite = 0;
 overwrite = overwrite | quick_map;
 
 % % AGBT16B_400_01 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -190,13 +190,13 @@ overwrite = overwrite | quick_map;
 % note = '1st_seven';
 
 % AGBT17B_360_02 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-session = AGBT17B_360_02;
-% % % Calibrator
-on_scans = [24:28,30:34,36:40,42:46,48:52,54:58,60:63];
-off_scans = [29,35,41,47,53,59];
-source = source3C147;
-Nint = 2;
-note = 'grid';
+% session = AGBT17B_360_02;
+% % % % Calibrator
+% on_scans = [24:28,30:34,36:40,42:46,48:52,54:58,60:63];
+% off_scans = [29,35,41,47,53,59];
+% source = source3C147;
+% Nint = 2;
+% note = 'grid';
 
 % AGBT17B_360_02 2nd Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % session = AGBT17B_360_02;
@@ -338,13 +338,13 @@ note = 'grid';
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % AGBT17B_360_06 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% session = AGBT17B_360_06;
-% % % % Calibrator
-% on_scans = [71:75,77:81,83:87,89:93,95:99,101:105,107:110]; % Might be 1 less than this scan number.
-% off_scans = [76,82,88,94,100,106]; % Might be 1 less than this scan number.
-% source = source3C48;
-% Nint = 2;
-% note = 'grid';
+session = AGBT17B_360_06;
+% % % Calibrator
+on_scans = [71:75,77:81,83:87,89:93,95:99,101:105,107:110]; % Might be 1 less than this scan number.
+off_scans = [76,82,88,94,100,106]; % Might be 1 less than this scan number.
+source = source3C48;
+Nint = 10;
+note = 'grid';
 
 % AGBT17B_455_01 1st Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % session = AGBT17B_455_01;
@@ -536,6 +536,7 @@ for p_idx = 1:2
     AZ = [];
     EL = [];
     cal = [];
+    R_all = [];
     on_off = 1;
     for i = 1:length(on_tstamp)
         tmp_stmp = on_tstamp{i};
@@ -564,6 +565,13 @@ for p_idx = 1:2
         hold off;
         drawnow;
 
+        % Concatenate coordinates
+        AZ = [AZ; az];
+        EL = [EL; el];
+        
+        % Concatenate R along the time sample dimension
+        R_all = cat(4, R_all, R);
+        
         % Find nearest off poinitng
         for j = 1:length(AZoff)%length(off_tstamp)
             az_dist = az - AZoff(j);
@@ -576,62 +584,74 @@ for p_idx = 1:2
         fprintf('     Using %s as the off pointing...\n', off_tstamp{idx});
         OFF = load(sprintf('%s/%s', out_dir, off_tstamp{idx}));
 
-        % Compute mamean(dmjd); % x-SNR weights and compute sensitivity
-        Senstmp = zeros(size(R,4),size(R,3));
-
-        % Get steering vectors
-        fprintf('     Obtaining steering vectors...\n');
-        %a = get_steering_vectors(R, OFF.R, good_idx, bad_freqs, save_dir, tmp_stmp, pol, 1);
-        a = get_steering_vectors(R, OFF.R, good_idx, bad_freqs, save_dir, tmp_stmp, pol, overwrite);
-
-        if i == 1
-            a_agg = a;
-        else
-            % Append to aggregated steering vector matrix
-            a_agg = cat(2, a_agg, a);
-        end
-
-        fprintf('     Calculating weights and sensitivity...\n');
-        w = zeros(size(a));
-        for t = 1:size(R,4)
-            for b = 1:size(R,3)
+    end
+    
+    
+    % Compute mamean(dmjd); % x-SNR weights and compute sensitivity
+    Sens = zeros(size(R_all,4),size(R_all,4),size(R_all,3));
+    
+    % Get steering vectors
+    fprintf('     Obtaining steering vectors...\n');
+    %a = get_steering_vectors(R, OFF.R, good_idx, bad_freqs, save_dir, tmp_stmp, pol, 1);
+    a = get_steering_vectors(R_all, OFF.R, good_idx, bad_freqs, save_dir, tmp_stmp, pol, overwrite);
+    
+%     if i == 1
+%         a_agg = a;
+%     else
+%         % Append to aggregated steering vector matrix
+%         a_agg = cat(2, a_agg, a);
+%     end
+    tic;
+    fprintf('     Calculating weights and sensitivity...\n');
+    w = zeros(size(a));
+    for t = 1:size(R_all,4)
+        for t2 = 1:size(R_all,4)
+            for b = 1:size(R_all,3)
                 if sum(bad_freqs == b) == 0
                     w(:,t,b) = OFF.R(good_idx, good_idx, b)\a(:,t,b);
                     w(:,t,b) = w(:,t,b)./(w(:,t,b)'*a(:,t,b));
-                    Pon = w(:,t,b)'*R(good_idx, good_idx, b, t)*w(:,t,b);
+                    Pon = abs(w(:,t,b)'*a(:,t2,b))^2; % w(:,t,b)'*R_all(good_idx, good_idx, b, t2)*w(:,t,b);
                     Poff = w(:,t,b)'*OFF.R(good_idx, good_idx, b)*w(:,t,b);
                     % Flux calibrated weights %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                     alpha = sqrt(flux_density(b)/(Pon-Poff));
-%                     w(:,t,b) = alpha*w(:,t,b);
+                    %                     alpha = sqrt(flux_density(b)/(Pon-Poff));
+                    %                     w(:,t,b) = alpha*w(:,t,b);
                     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                    SNR(t,b) = (Pon - Poff)/Poff;
-                    Senstmp(t,b) = 2*kB*SNR(t,b)./(flux_density(b)*1e-26);
+                    SNR(t,t2,b) = (Pon - Poff)/Poff;
+                    %                         Senstmp(t,t2,b) = 2*kB*SNR(t,t2,b)./(flux_density(b)*1e-26);
+                    Sens(t,t2,b) = (Ap*1e-26)./(2*kB*SNR(t,t2,b)); % In K/Jy
+                    if real(Sens(t,t2,b)) == -2.8456
+                        Sens(t,t2,b) = NaN;
+                    end
                 else
-                    Senstmp(t,b) = 0;
+                    Sens(t,t2,b) = 0;
                     w(:,t,b) = zeros(size(a,1),1);
                 end
             end
-            AZ = [AZ; az(t)];
-            EL = [EL; el(t)];
         end
-        Sens = [Sens; Senstmp];
-
-        if i == 1
-            w_agg = w;
-        else
-            % Append to aggregated weight vector matrix
-            w_agg = cat(2, w_agg, w);
-        end
+%         AZ = [AZ; az(t)];
+%         EL = [EL; el(t)];
     end
-
+    
+    %         Sens = [Sens; Senstmp];
+    %         Sens = padconcatenation(Sens,Senstmp,1); % size(R,4) may vary with timestamp so matrices are different sizes sometimes.
+    
+%     if i == 1
+%         w_agg = w;
+%     else
+%         %             Sens = [Sens; Senstmp];
+%         % Append to aggregated weight vector matrix
+%         w_agg = cat(2, w_agg, w);
+%     end
+    %     end
+    
     %if quick_map == 0
-        a_filename = sprintf('%s/%s_aggregated_grid_%s_%s.mat', out_dir, session.session_name, pol, note);
-        fprintf('Saving aggregated steering vectors to %s\n', a_filename);
-        save(a_filename, 'AZ', 'EL', 'a_agg');
-
-        w_filename = sprintf('%s/%s_aggregated_weights_%s_%s.mat', out_dir, session.session_name, pol, note);
-        fprintf('Saving aggregated weight vectors to %s\n', w_filename);
-        save(w_filename, 'AZ', 'EL', 'w_agg');
+    %         a_filename = sprintf('%s/%s_aggregated_grid_%s_%s.mat', out_dir, session.session_name, pol, note);
+    %         fprintf('Saving aggregated steering vectors to %s\n', a_filename);
+    %         save(a_filename, 'AZ', 'EL', 'a_agg');
+    %
+    %         w_filename = sprintf('%s/%s_aggregated_weights_%s_%s.mat', out_dir, session.session_name, pol, note);
+    %         fprintf('Saving aggregated weight vectors to %s\n', w_filename);
+    %         save(w_filename, 'AZ', 'EL', 'w_agg');
     %end
 
     % Plot map
@@ -652,19 +672,25 @@ for p_idx = 1:2
     map_fig = figure();
     fudge = session.fudge;
     sens_freq = 101;
+    fprintf('     Plotting sensitivity map...\n');
     for b = sens_freq:sens_freq %Nbins
-        fprintf('Bin %d/%d\n', b, 500);
-        Sq = griddata(AZ + fudge*EL, EL, real(squeeze(Sens(:,b))), X, Y);
-        imagesc(xval, yval, Sq);
-%         contour(xval, yval, Sq);
-        colorbar;
-        set(gca, 'ydir', 'normal');
-        colormap('jet');
-        xlabel('Cross-Elevation Offset (degrees)');
-        ylabel('Elevation Offset (degrees)');
-        title(sprintf('Formed Beam Sensitivity Map - %spol, %g MHz', pol, freq(b)));
+        for t = [10,50,100,150,200] %1:size(Sens,1)
+%             fprintf('Bin %d/%d\n', b, 500);
+            Sq = griddata(AZ + fudge*EL, EL, real(squeeze(Sens(t,:,b))), X, Y);
+%                     imagesc(xval, yval, Sq);
+            contour(xval, yval, Sq);
+            colorbar;
+            set(gca, 'ydir', 'normal');
+            colormap('jet');
+            xlabel('Cross-Elevation Offset (degrees)');
+            ylabel('Elevation Offset (degrees)');
+            title(sprintf('Formed Beam Sensitivity Map - %spol, %g MHz', pol, freq(b)));
+            hold on;
+        end
+        hold off;
     end
 
+    toc;
     % Save figure
     sens_map_filename = sprintf('%s/%s_%spol_map_%s', session.session_name, session.session_name, pol, note);
     saveas(map_fig, sprintf('%s.png', sens_map_filename));
@@ -672,21 +698,21 @@ for p_idx = 1:2
     saveas(map_fig, sprintf('%s.eps', sens_map_filename));
     saveas(map_fig, sprintf('%s.fig', sens_map_filename), 'fig');
 
-    % Get the angle of arrival for max sensitivity beam
-    [s_max,max_idx(p_idx)] = max(Sens(:,sens_freq));
-    % Tsys_eta = Ap./(Sens(max_idx,:)*22.4./flux_density); % Remember to change when running again.
-    Tsys_eta = real(Ap./Sens);
-    Tsys_eta(Tsys_eta < 0) = NaN;
-    
-    Tsys_eta_pruned(p_idx,:,:) = Tsys_eta;
-%     Tsys_eta_pruned(Tsys_eta > 200) = NaN;
-
-    tsys_fig = figure();
-    plot(freq,squeeze(Tsys_eta_pruned(p_idx,max_idx(p_idx),:)).');
-    title('T_s_y_s/\eta vs Frequency');
-    xlabel('Frequency (MHz)');
-    ylabel('T_s_y_s/\eta (K)');
-    grid on;
+%     % Get the angle of arrival for max sensitivity beam
+%     [s_max,max_idx(p_idx)] = max(Sens(:,sens_freq));
+%     % Tsys_eta = Ap./(Sens(max_idx,:)*22.4./flux_density); % Remember to change when running again.
+%     Tsys_eta = real(Ap./Sens);
+%     Tsys_eta(Tsys_eta < 0) = NaN;
+%     
+%     Tsys_eta_pruned(p_idx,:,:) = Tsys_eta;
+% %     Tsys_eta_pruned(Tsys_eta > 200) = NaN;
+% 
+%     tsys_fig = figure();
+%     plot(freq,squeeze(Tsys_eta_pruned(p_idx,max_idx(p_idx),:)).');
+%     title('T_s_y_s/\eta vs Frequency');
+%     xlabel('Frequency (MHz)');
+%     ylabel('T_s_y_s/\eta (K)');
+%     grid on;
     
 %     % Save Tsys values
 %     tsys_filename = sprintf('%s/%s_%spol_tsys_%s.mat', out_dir, session.session_name, pol, note);
@@ -703,36 +729,36 @@ end
 
 
     
-tsys_fig = figure();
-plot(freq,squeeze(Tsys_eta_pruned(1,max_idx(1),:)).');
-hold on;
-plot(freq,squeeze(Tsys_eta_pruned(2,max_idx(2),:)).');
-hold off;
-title('T_s_y_s/\eta vs Frequency');
-legend('X-polarization', 'Y-polarization');
-% set(gca, 'fontsize', 16);
-xlabel('Frequency (MHz)');
-ylabel('T_s_y_s/\eta (K)');
-grid on;
-
-% Save figure
-tsys_filename = sprintf('%s/%s_tsys_%s', session.session_name, session.session_name, note);
-print('-dpng', '-r0', sprintf('%s.png', tsys_filename)); % increase resolution with print(fileType,resolution(dpi),filename)
-saveas(tsys_fig, sprintf('%s.png', tsys_filename));
-saveas(tsys_fig, sprintf('%s.pdf', tsys_filename));
-saveas(tsys_fig, sprintf('%s.eps', tsys_filename));
-saveas(tsys_fig, sprintf('%s.fig', tsys_filename), 'fig');
-    
-for p_idx = 1:2
-    if p_idx == 1
-        pol = 'X';
-    else
-        pol = 'Y';
-    end
-    % Save Tsys values
-    tsys_filename = sprintf('%s/%s_%spol_tsys_%s.mat', out_dir,session.session_name, pol, note);
-    save(tsys_filename, 'freq', 'Tsys_eta');
-    fprintf('Saved Tsys values to %s\n', tsys_filename);
-end
+% tsys_fig = figure();
+% plot(freq,squeeze(Tsys_eta_pruned(1,max_idx(1),:)).');
+% hold on;
+% plot(freq,squeeze(Tsys_eta_pruned(2,max_idx(2),:)).');
+% hold off;
+% title('T_s_y_s/\eta vs Frequency');
+% legend('X-polarization', 'Y-polarization');
+% % set(gca, 'fontsize', 16);
+% xlabel('Frequency (MHz)');
+% ylabel('T_s_y_s/\eta (K)');
+% grid on;
+% 
+% % Save figure
+% tsys_filename = sprintf('%s/%s_tsys_%s', session.session_name, session.session_name, note);
+% print('-dpng', '-r0', sprintf('%s.png', tsys_filename)); % increase resolution with print(fileType,resolution(dpi),filename)
+% saveas(tsys_fig, sprintf('%s.png', tsys_filename));
+% saveas(tsys_fig, sprintf('%s.pdf', tsys_filename));
+% saveas(tsys_fig, sprintf('%s.eps', tsys_filename));
+% saveas(tsys_fig, sprintf('%s.fig', tsys_filename), 'fig');
+%     
+% for p_idx = 1:2
+%     if p_idx == 1
+%         pol = 'X';
+%     else
+%         pol = 'Y';
+%     end
+%     % Save Tsys values
+%     tsys_filename = sprintf('%s/%s_%spol_tsys_%s.mat', out_dir,session.session_name, pol, note);
+%     save(tsys_filename, 'freq', 'Tsys_eta');
+%     fprintf('Saved Tsys values to %s\n', tsys_filename);
+% end
 
 toc;

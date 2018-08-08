@@ -41,7 +41,6 @@ for el_idx = 1:Nel
     good_idx = intersect(good_idx, good_chans);
     F = [ones(length(good_idx),1), faxis(good_idx).'];
     phi1 = phi(good_idx);
-    
 %     %Plot unwrapped phase...
     if 1
         figure(1);
@@ -50,12 +49,13 @@ for el_idx = 1:Nel
         title(sprintf('Magnitude of Cross-Correlation, Elements %d/%d', ref_el, el_idx));
         xlabel('Frequency (MHz)');
         ylabel('Power (dB, arb. units)');
+        set(gca, 'FontSize', 12);
         subplot(2,1,2);
         plot(faxis(good_idx)/1e6, phi(good_idx)); grid on;
         title(sprintf('Relative Phase Elements %d/%d', ref_el, el_idx));
-        xlabel('Frequency (MHz)');
+        xlabel({'Frequency (MHz)', 'Post-word lock'});
         ylabel('Phase (rad)');
-        keyboard;
+        set(gca, 'FontSize', 12);
     end
 
     % solve for ramps and errors

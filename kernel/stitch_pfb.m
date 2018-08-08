@@ -11,7 +11,7 @@ end
 
 Rtot = [];
 
-el = 1;
+el = 4;
 tstamp = '2017_08_04_15:09:11';
 dir = '/lustre/projects/flag/AGBT16B_400_13/BF/'; %/TMP/BF/ 
 fname = [dir,tstamp];

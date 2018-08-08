@@ -21,7 +21,8 @@ function [ B, xid ] = extract_bf_output( fits_filename )
         stepSize = totalRows;
         fluxdata = fits.readCol(fptr,colidx,1,stepSize);
     else
-        fluxdata = fits.readCol(fptr,colidx,7000,stepSize);
+%         fluxdata = fits.readCol(fptr,colidx,7000,stepSize);
+        fluxdata = fits.readCol(fptr,colidx,1,stepSize);
     end
     
     
@@ -49,13 +50,15 @@ function [ B, xid ] = extract_bf_output( fits_filename )
     Nrows = size(fluxdata, 1);   
     Npol = 4; % X self-polarized, Y self-polarized, XY polarized (real), XY polarized (imaginary)
     Nbeam = 7;
-    Nbin = 25;
+%     Nbin = 25;
+    Nbin = 20; % packet_gen scalloping fix
     Nsti = 100;
     
 %     B = reshape(data, Nrows, Nbeam, Npol, Nbin, Nsti);
     B = zeros(Nbeam, Npol, Nbin, Nsti*Nrows);
+    outSize = Nbeam*Npol*Nbin*Nsti;
     for r = 1:Nrows
-        B(:,:,:,Nsti*(r-1)+1:Nsti*r) = reshape(fluxdata(r,:), Nbeam, Npol, Nbin, Nsti);
+        B(:,:,:,Nsti*(r-1)+1:Nsti*r) = reshape(fluxdata(r,1:outSize), Nbeam, Npol, Nbin, Nsti);
     end
 end
 

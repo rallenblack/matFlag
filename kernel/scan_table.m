@@ -1,7 +1,13 @@
 % Global parameters
-data_root = '/lustre/projects/flag';
+data_root = '/lustre/flag';
 meta_root = '/home/gbtdata';
+meta_root1 = '/home/archive/science-data/16B';
+weight_dir = '/home/groups/flag/weight_files/';
 proj_id = 'AGBT16B_400';
+proj_id_2 = 'AGBT17B_360';
+proj_id_3 = 'AGBT17B_221';
+proj_id_4 = 'AGBT17B_455';
+proj_id_5 = 'AGBT18A_443';
 obs_long = 38.419531;
 obs_lat  = -79.831808;
 G = 6.6; % Approximate for constant of the year used to calculate GST
@@ -9,7 +15,7 @@ G = 6.6; % Approximate for constant of the year used to calculate GST
 %% AGBT16B_400_01
 % Scan numbers and time stamps
 AGBT16B_400_01.session_name = 'AGBT16B_400_01';
-log_filename = sprintf('%s/%s_01/ScanLog.fits', meta_root, proj_id);
+log_filename = sprintf('%s/%s_01/ScanLog.fits', meta_root1, proj_id);
 scan_data = fitsread(log_filename, 'bintable', 1);
 time_stamps = unique(scan_data{1});
 
@@ -53,7 +59,7 @@ AGBT16B_400_01.beam_az = [-0.22, 0.1, -0.14, -0.03, 0.1, -0.2, 0.2];
 
 %% AGBT16B_400_02
 AGBT16B_400_02.session_name = 'AGBT16B_400_02';
-log_filename = sprintf('%s/%s_02/ScanLog.fits', meta_root, proj_id);
+log_filename = sprintf('%s/%s_02/ScanLog.fits', meta_root1, proj_id);
 scan_data = fitsread(log_filename, 'bintable', 1);
 time_stamps = unique(scan_data{1});
 
@@ -106,7 +112,7 @@ AGBT16B_400_02.beam_az = [212.7, 212.9, 212.7, 212.9, 213.1, 212.9, 213.1];
 
 %% AGBT16B_400_03
 AGBT16B_400_03.session_name = 'AGBT16B_400_03';
-log_filename = sprintf('%s/%s_03/ScanLog.fits', meta_root, proj_id);
+log_filename = sprintf('%s/%s_03/ScanLog.fits', meta_root1, proj_id);
 scan_data = fitsread(log_filename, 'bintable', 1);
 time_stamps = unique(scan_data{1});
 
@@ -149,7 +155,7 @@ AGBT16B_400_03.beam_az = [-0.5, 0.5, -1.0, 0.0, 1.0, -0.5,  0.5]*9/60;
 
 %% AGBT16B_400_04
 AGBT16B_400_04.session_name = 'AGBT16B_400_04';
-log_filename = sprintf('%s/%s_04/ScanLog.fits', meta_root, proj_id);
+log_filename = sprintf('%s/%s_04/ScanLog.fits', meta_root1, proj_id);
 scan_data = fitsread(log_filename, 'bintable', 1);
 time_stamps = unique(scan_data{1});
 
@@ -191,7 +197,7 @@ AGBT16B_400_04.beam_az = [212.9, 213.11, 212.9, 213.07, 213.16, 212.9, 213.16];
 
 %% AGBT16B_400_05
 AGBT16B_400_05.session_name = 'AGBT16B_400_05';
-log_filename = sprintf('%s/%s_05/ScanLog.fits', meta_root, proj_id);
+log_filename = sprintf('%s/%s_05/ScanLog.fits', meta_root1, proj_id);
 scan_data = fitsread(log_filename, 'bintable', 1);
 time_stamps = unique(scan_data{1});
 
@@ -232,7 +238,7 @@ AGBT16B_400_05.Ydims = [49.6, 50.1];
 %% AGBT16B_400_07
 % Scan numbers and time stamps
 AGBT16B_400_07.session_name = 'AGBT16B_400_07';
-log_filename = sprintf('%s/%s_07/ScanLog.fits', meta_root, proj_id);
+log_filename = sprintf('%s/%s_07/ScanLog.fits', meta_root1, proj_id);
 scan_data = fitsread(log_filename, 'bintable', 1);
 time_stamps = unique(scan_data{1});
 
@@ -276,7 +282,7 @@ AGBT16B_400_07.beam_az = [-0.22, 0.1, 0.1, -0.2, 0.2];
 %% AGBT16B_400_09
 % Scan numbers and time stamps
 AGBT16B_400_09.session_name = 'AGBT16B_400_09';
-log_filename = sprintf('%s/%s_09/ScanLog.fits', meta_root, proj_id);
+log_filename = sprintf('%s/%s_09/ScanLog.fits', meta_root1, proj_id);
 scan_data = fitsread(log_filename, 'bintable', 1);
 time_stamps = unique(scan_data{1});
 
@@ -373,7 +379,7 @@ AGBT16B_400_09.beam_az = [-0.5, 0.5, -1.0, 0.0, 1.0, -0.5,  0.5]*9/60;
 %% AGBT16B_400_11
 % % Scan numbers and time stamps
 AGBT16B_400_11.session_name = 'AGBT16B_400_11';
-log_filename = sprintf('%s/%s_11/ScanLog.fits', meta_root, proj_id);
+log_filename = sprintf('%s/%s_11/ScanLog.fits', meta_root1, proj_id);
 scan_data = fitsread(log_filename, 'bintable', 1);
 time_stamps = unique(scan_data{1});
 
@@ -415,7 +421,7 @@ AGBT16B_400_11.beam_az = [-0.5, 0.5, -1.0, 0.0, 1.0, -0.5,  0.5]*9/60;
 %% AGBT16B_400_12
 % % Scan numbers and time stamps
 AGBT16B_400_12.session_name = 'AGBT16B_400_12';
-log_filename = sprintf('%s/%s_12/ScanLog.fits', meta_root, proj_id);
+log_filename = sprintf('%s/%s_12/ScanLog.fits', meta_root1, proj_id);
 scan_data = fitsread(log_filename, 'bintable', 1);
 time_stamps = unique(scan_data{1});
 
@@ -458,7 +464,7 @@ AGBT16B_400_12.beam_az = [-0.5, 0.5, -1.0, 0.0, 1.0, -0.5,  0.5]*9/60;
 %% AGBT16B_400_13
 % % Scan numbers and time stamps
 AGBT16B_400_13.session_name = 'AGBT16B_400_13';
-log_filename = sprintf('%s/%s_13/ScanLog.fits', meta_root, proj_id);
+log_filename = sprintf('%s/%s_13/ScanLog.fits', meta_root1, proj_id);
 scan_data = fitsread(log_filename, 'bintable', 1);
 time_stamps = unique(scan_data{1});
 
@@ -496,7 +502,7 @@ AGBT16B_400_13.beam_az = [-0.5, 0.5, -1.0, 0.0, 1.0, -0.5,  0.5]*9/60;
 %% AGBT16B_400_14
 % % Scan numbers and time stamps
 AGBT16B_400_14.session_name = 'AGBT16B_400_14';
-log_filename = sprintf('%s/%s_14/ScanLog.fits', meta_root, proj_id);
+log_filename = sprintf('%s/%s_14/ScanLog.fits', meta_root1, proj_id);
 scan_data = fitsread(log_filename, 'bintable', 1);
 time_stamps = unique(scan_data{1});
 
@@ -529,3 +535,447 @@ AGBT16B_400_14.Ydims = [-0.23, 0.23];
                 
 AGBT16B_400_14.beam_el = [ 1.0, 1.0,  0.0, 0.0, 0.0, -1.0, -1.0]*9/60;
 AGBT16B_400_14.beam_az = [-0.5, 0.5, -1.0, 0.0, 1.0, -0.5,  0.5]*9/60;
+
+%% AGBT17B_360_01
+% % Scan numbers and time stamps
+AGBT17B_360_01.session_name = 'AGBT17B_360_01';
+log_filename = sprintf('%s/%s_01/ScanLog.fits', meta_root, proj_id_2);
+scan_data = fitsread(log_filename, 'bintable', 1);
+time_stamps = unique(scan_data{1});
+
+for i = 1:length(time_stamps)
+    my_stamp = time_stamps{i};
+    my_stamp = strrep(my_stamp, '-', '_');
+    my_stamp = strrep(my_stamp, 'T', '_');
+    AGBT17B_360_01.scans{i} = my_stamp;
+end
+
+% Frequency mask
+bad_freqs = [];
+AGBT17B_360_01.bad_freqs = bad_freqs;
+
+% Element mappings
+X = [1:7, 35, 9:12, 14, 13, 15:19];
+Y = [21, 20, 23:34, 36:38]; % [21, 20, 23:34, 8, 36:39];
+goodX = X; % goodX(X < 9) = [];
+goodY = Y;
+% goodY(Y==33) = [];
+
+AGBT17B_360_01.X = X;
+AGBT17B_360_01.Y = Y;
+AGBT17B_360_01.goodX = goodX;
+AGBT17B_360_01.goodY = goodY;
+
+AGBT17B_360_01.fudge = 0;
+AGBT17B_360_01.Xdims = [-0.23, 0.23];
+AGBT17B_360_01.Ydims = [-0.23, 0.23];
+                
+AGBT17B_360_01.beam_el = [ 3.94, 3.94,  0.0, 0.0, 0.0, -3.94, -3.94]*1/60;
+AGBT17B_360_01.beam_az = [-2.275, 2.275, -4.55, 0.0, 4.55, -2.275,  2.275]*1/60;
+
+%% AGBT17B_360_02
+% % Scan numbers and time stamps
+AGBT17B_360_02.session_name = 'AGBT17B_360_02';
+log_filename = sprintf('%s/%s_02/ScanLog.fits', meta_root, proj_id_2);
+scan_data = fitsread(log_filename, 'bintable', 1);
+time_stamps = unique(scan_data{1});
+
+for i = 1:length(time_stamps)
+    my_stamp = time_stamps{i};
+    my_stamp = strrep(my_stamp, '-', '_');
+    my_stamp = strrep(my_stamp, 'T', '_');
+    AGBT17B_360_02.scans{i} = my_stamp;
+end
+
+% Frequency mask
+bad_freqs = [];
+AGBT17B_360_02.bad_freqs = bad_freqs;
+
+% Element mappings
+X = [1:7, 35, 9:12, 14, 13, 15:19];
+Y = [21, 20, 23:34, 36:38]; % [21, 20, 23:34, 8, 36:39];
+goodX = X; % goodX(X < 9) = [];
+goodY = Y;
+% goodY(Y==33) = [];
+
+AGBT17B_360_02.X = X;
+AGBT17B_360_02.Y = Y;
+AGBT17B_360_02.goodX = goodX;
+AGBT17B_360_02.goodY = goodY;
+
+AGBT17B_360_02.fudge = 0;
+AGBT17B_360_02.Xdims = [-0.23, 0.23];
+AGBT17B_360_02.Ydims = [-0.23, 0.23];
+                
+AGBT17B_360_02.beam_el = [ 3.94, 3.94,  0.0, 0.0, 0.0, -3.94, -3.94]*1/60;
+AGBT17B_360_02.beam_az = [-2.275, 2.275, -4.55, 0.0, 4.55, -2.275,  2.275]*1/60;
+
+%% AGBT17B_360_03
+% % Scan numbers and time stamps
+AGBT17B_360_03.session_name = 'AGBT17B_360_03';
+log_filename = sprintf('%s/%s_03/ScanLog.fits', meta_root, proj_id_2);
+scan_data = fitsread(log_filename, 'bintable', 1);
+time_stamps = unique(scan_data{1});
+
+for i = 1:length(time_stamps)
+    my_stamp = time_stamps{i};
+    my_stamp = strrep(my_stamp, '-', '_');
+    my_stamp = strrep(my_stamp, 'T', '_');
+    AGBT17B_360_03.scans{i} = my_stamp;
+end
+
+% Frequency mask
+bad_freqs = [];
+AGBT17B_360_03.bad_freqs = bad_freqs;
+
+% Element mappings
+X = [1:7, 35, 9:12, 14, 13, 15:19];
+Y = [21, 20, 23:34, 36:38]; % [21, 20, 23:34, 8, 36:39];
+goodX = X; % goodX(X < 9) = [];
+goodY = Y;
+% goodY(Y==33) = [];
+
+AGBT17B_360_03.X = X;
+AGBT17B_360_03.Y = Y;
+AGBT17B_360_03.goodX = goodX;
+AGBT17B_360_03.goodY = goodY;
+
+AGBT17B_360_03.fudge = 0;
+AGBT17B_360_03.Xdims = [-0.23, 0.23];
+AGBT17B_360_03.Ydims = [-0.23, 0.23];
+                
+AGBT17B_360_03.beam_el = [ 3.94, 3.94,  0.0, 0.0, 0.0, -3.94, -3.94]*1/60;
+AGBT17B_360_03.beam_az = [-2.275, 2.275, -4.55, 0.0, 4.55, -2.275,  2.275]*1/60;
+
+%% AGBT17B_360_04
+% % Scan numbers and time stamps
+AGBT17B_360_04.session_name = 'AGBT17B_360_04';
+log_filename = sprintf('%s/%s_04/ScanLog.fits', meta_root, proj_id_2);
+scan_data = fitsread(log_filename, 'bintable', 1);
+time_stamps = unique(scan_data{1});
+
+for i = 1:length(time_stamps)
+    my_stamp = time_stamps{i};
+    my_stamp = strrep(my_stamp, '-', '_');
+    my_stamp = strrep(my_stamp, 'T', '_');
+    AGBT17B_360_04.scans{i} = my_stamp;
+end
+
+% Frequency mask
+bad_freqs = [66:70, 166:170, 266:270, 366:370, 466:470];
+AGBT17B_360_04.bad_freqs = bad_freqs;
+
+% Element mappings
+X = [1:7, 35, 9:12, 14, 13, 15:19];
+Y = [21, 20, 23:34, 36:38]; % [21, 20, 23:34, 8, 36:39];
+goodX = X; % goodX(X < 9) = [];
+goodY = Y;
+% goodY(Y==33) = [];
+
+AGBT17B_360_04.X = X;
+AGBT17B_360_04.Y = Y;
+AGBT17B_360_04.goodX = goodX;
+AGBT17B_360_04.goodY = goodY;
+
+AGBT17B_360_04.fudge = 0;
+AGBT17B_360_04.Xdims = [-0.23, 0.23];
+AGBT17B_360_04.Ydims = [-0.23, 0.23];
+                
+AGBT17B_360_04.beam_el = [ 3.94, 3.94,  0.0, 0.0, 0.0, -3.94, -3.94]*1/60;
+AGBT17B_360_04.beam_az = [-2.275, 2.275, -4.55, 0.0, 4.55, -2.275,  2.275]*1/60;
+
+%% AGBT17B_360_05
+% % Scan numbers and time stamps
+AGBT17B_360_05.session_name = 'AGBT17B_360_05';
+log_filename = sprintf('%s/%s_05/ScanLog.fits', meta_root, proj_id_2);
+scan_data = fitsread(log_filename, 'bintable', 1);
+time_stamps = unique(scan_data{1});
+
+for i = 1:length(time_stamps)
+    my_stamp = time_stamps{i};
+    my_stamp = strrep(my_stamp, '-', '_');
+    my_stamp = strrep(my_stamp, 'T', '_');
+    AGBT17B_360_05.scans{i} = my_stamp;
+end
+
+% Frequency mask
+bad_freqs = [];
+AGBT17B_360_05.bad_freqs = bad_freqs;
+
+% Element mappings
+X = [1:7, 35, 9:12, 14, 13, 15:19];
+Y = [21, 20, 23:34, 36:38]; % [21, 20, 23:34, 8, 36:39];
+goodX = X; % goodX(X < 9) = [];
+goodY = Y;
+% goodY(Y==33) = [];
+
+AGBT17B_360_05.X = X;
+AGBT17B_360_05.Y = Y;
+AGBT17B_360_05.goodX = goodX;
+AGBT17B_360_05.goodY = goodY;
+
+AGBT17B_360_05.fudge = 0;
+AGBT17B_360_05.Xdims = [-0.23, 0.23];
+AGBT17B_360_05.Ydims = [-0.23, 0.23];
+                
+AGBT17B_360_05.beam_el = [ 3.94, 3.94,  0.0, 0.0, 0.0, -3.94, -3.94]*1/60;
+AGBT17B_360_05.beam_az = [-2.275, 2.275, -4.55, 0.0, 4.55, -2.275,  2.275]*1/60;
+
+%% AGBT17B_360_06
+% % Scan numbers and time stamps
+AGBT17B_360_06.session_name = 'AGBT17B_360_06';
+log_filename = sprintf('%s/%s_06/ScanLog.fits', meta_root, proj_id_2);
+scan_data = fitsread(log_filename, 'bintable', 1);
+time_stamps = unique(scan_data{1});
+
+for i = 1:length(time_stamps)
+    my_stamp = time_stamps{i};
+    my_stamp = strrep(my_stamp, '-', '_');
+    my_stamp = strrep(my_stamp, 'T', '_');
+    AGBT17B_360_06.scans{i} = my_stamp;
+end
+
+% Frequency mask
+bad_freqs = [];
+AGBT17B_360_06.bad_freqs = bad_freqs;
+
+% Element mappings
+X = [1:7, 35, 9:12, 14, 13, 15:19];
+Y = [21, 20, 23:34, 36:38]; % [21, 20, 23:34, 8, 36:39];
+goodX = X; % goodX(X < 9) = [];
+goodY = Y;
+% goodY(Y==33) = [];
+
+AGBT17B_360_06.X = X;
+AGBT17B_360_06.Y = Y;
+AGBT17B_360_06.goodX = goodX;
+AGBT17B_360_06.goodY = goodY;
+
+AGBT17B_360_06.fudge = 0;
+AGBT17B_360_06.Xdims = [-0.23, 0.23];
+AGBT17B_360_06.Ydims = [-0.23, 0.23];
+                
+AGBT17B_360_06.beam_el = [ 3.94, 3.94,  0.0, 0.0, 0.0, -3.94, -3.94]*1/60;
+AGBT17B_360_06.beam_az = [-2.275, 2.275, -4.55, 0.0, 4.55, -2.275,  2.275]*1/60;
+
+%% AGBT17B_360_07
+% % Scan numbers and time stamps
+AGBT17B_360_07.session_name = 'AGBT17B_360_07';
+log_filename = sprintf('%s/%s_07/ScanLog.fits', meta_root, proj_id_2);
+scan_data = fitsread(log_filename, 'bintable', 1);
+time_stamps = unique(scan_data{1});
+
+for i = 1:length(time_stamps)
+    my_stamp = time_stamps{i};
+    my_stamp = strrep(my_stamp, '-', '_');
+    my_stamp = strrep(my_stamp, 'T', '_');
+    AGBT17B_360_07.scans{i} = my_stamp;
+end
+
+% Frequency mask
+bad_freqs = [];
+AGBT17B_360_07.bad_freqs = bad_freqs;
+
+% Element mappings
+X = [1:7, 35, 9:12, 14, 13, 15:19];
+Y = [21, 20, 23:34, 36:38]; % [21, 20, 23:34, 8, 36:39];
+goodX = X; % goodX(X < 9) = [];
+goodY = Y;
+% goodY(Y==33) = [];
+
+AGBT17B_360_07.X = X;
+AGBT17B_360_07.Y = Y;
+AGBT17B_360_07.goodX = goodX;
+AGBT17B_360_07.goodY = goodY;
+
+AGBT17B_360_07.fudge = 0;
+AGBT17B_360_07.Xdims = [-0.23, 0.23];
+AGBT17B_360_07.Ydims = [-0.23, 0.23];
+                
+AGBT17B_360_07.beam_el = [ 3.94, 3.94,  0.0, 0.0, 0.0, -3.94, -3.94]*1/60;
+AGBT17B_360_07.beam_az = [-2.275, 2.275, -4.55, 0.0, 4.55, -2.275,  2.275]*1/60;
+
+%% AGBT17B_455_01
+% % Scan numbers and time stamps
+AGBT17B_455_01.session_name = 'AGBT17B_455_01';
+log_filename = sprintf('%s/%s_01/ScanLog.fits', meta_root, proj_id_4);
+scan_data = fitsread(log_filename, 'bintable', 1);
+time_stamps = unique(scan_data{1});
+
+for i = 1:length(time_stamps)
+    my_stamp = time_stamps{i};
+    my_stamp = strrep(my_stamp, '-', '_');
+    my_stamp = strrep(my_stamp, 'T', '_');
+    AGBT17B_455_01.scans{i} = my_stamp;
+end
+
+% Frequency mask
+bad_freqs = [];
+AGBT17B_455_01.bad_freqs = bad_freqs;
+
+% Element mappings
+X = [1:7, 35, 9:12, 14, 13, 15:19];
+Y = [21, 20, 23:34, 36:38]; % [21, 20, 23:34, 8, 36:39];
+goodX = X; % goodX(X < 9) = [];
+goodY = Y;
+% goodY(Y==33) = [];
+
+AGBT17B_455_01.X = X;
+AGBT17B_455_01.Y = Y;
+AGBT17B_455_01.goodX = goodX;
+AGBT17B_455_01.goodY = goodY;
+
+AGBT17B_455_01.fudge = 0;
+AGBT17B_455_01.Xdims = [-0.23, 0.23];
+AGBT17B_455_01.Ydims = [-0.23, 0.23];
+               
+AGBT17B_455_01.beam_el = [ 3.94, 3.94,  0.0, 0.0, 0.0, -3.94, -3.94]*1/60;
+AGBT17B_455_01.beam_az = [-2.275, 2.275, -4.55, 0.0, 4.55, -2.275,  2.275]*1/60;
+
+%% AGBT18A_443_01
+% % Scan numbers and time stamps
+AGBT18A_443_01.session_name = 'AGBT18A_443_01';
+log_filename = sprintf('%s/%s_01/ScanLog.fits', meta_root, proj_id_5);
+scan_data = fitsread(log_filename, 'bintable', 1);
+time_stamps = unique(scan_data{1});
+
+for i = 1:length(time_stamps)
+    my_stamp = time_stamps{i};
+    my_stamp = strrep(my_stamp, '-', '_');
+    my_stamp = strrep(my_stamp, 'T', '_');
+    AGBT18A_443_01.scans{i} = my_stamp;
+end
+
+% Frequency mask
+bad_freqs = [];
+AGBT18A_443_01.bad_freqs = bad_freqs;
+
+% Element mappings
+X = [1:7, 35, 9:12, 14, 13, 15:19];
+Y = [21, 20, 23:34, 36:38]; % [21, 20, 23:34, 8, 36:39];
+goodX = X; % goodX(X < 9) = [];
+goodY = Y;
+% goodY(Y==33) = [];
+
+AGBT18A_443_01.X = X;
+AGBT18A_443_01.Y = Y;
+AGBT18A_443_01.goodX = goodX;
+AGBT18A_443_01.goodY = goodY;
+
+AGBT18A_443_01.fudge = 0;
+AGBT18A_443_01.Xdims = [-0.23, 0.23];
+AGBT18A_443_01.Ydims = [-0.23, 0.23];
+               
+AGBT18A_443_01.beam_el = [ 3.94, 3.94,  0.0, 0.0, 0.0, -3.94, -3.94]*1/60;
+AGBT18A_443_01.beam_az = [-2.275, 2.275, -4.55, 0.0, 4.55, -2.275,  2.275]*1/60;
+
+%% AGBT17B_221_01
+% % Scan numbers and time stamps
+AGBT17B_221_01.session_name = 'AGBT17B_221_01';
+log_filename = sprintf('%s/%s_01/ScanLog.fits', meta_root, proj_id_3);
+scan_data = fitsread(log_filename, 'bintable', 1);
+time_stamps = unique(scan_data{1});
+
+for i = 1:length(time_stamps)
+    my_stamp = time_stamps{i};
+    my_stamp = strrep(my_stamp, '-', '_');
+    my_stamp = strrep(my_stamp, 'T', '_');
+    AGBT17B_221_01.scans{i} = my_stamp;
+end
+
+% Frequency mask
+bad_freqs = [];
+AGBT17B_221_01.bad_freqs = bad_freqs;
+
+% Element mappings
+X = [1:7, 35, 9:12, 14, 13, 15:19];
+Y = [21, 20, 23:34, 36:38]; % [21, 20, 23:34, 8, 36:39];
+goodX = X; % goodX(X < 9) = [];
+goodY = Y;
+% goodY(Y==33) = [];
+
+AGBT17B_221_01.X = X;
+AGBT17B_221_01.Y = Y;
+AGBT17B_221_01.goodX = goodX;
+AGBT17B_221_01.goodY = goodY;
+
+AGBT17B_221_01.fudge = 0;
+AGBT17B_221_01.Xdims = [-0.23, 0.23];
+AGBT17B_221_01.Ydims = [-0.23, 0.23];
+                
+AGBT17B_221_01.beam_el = [ 3.94, 3.94,  0.0, 0.0, 0.0, -3.94, -3.94]*1/60;
+AGBT17B_221_01.beam_az = [-2.275, 2.275, -4.55, 0.0, 4.55, -2.275,  2.275]*1/60;
+
+%% AGBT17B_221_02
+% % Scan numbers and time stamps
+AGBT17B_221_02.session_name = 'AGBT17B_221_02';
+log_filename = sprintf('%s/%s_02/ScanLog.fits', meta_root, proj_id_3);
+scan_data = fitsread(log_filename, 'bintable', 1);
+time_stamps = unique(scan_data{1});
+
+for i = 1:length(time_stamps)
+    my_stamp = time_stamps{i};
+    my_stamp = strrep(my_stamp, '-', '_');
+    my_stamp = strrep(my_stamp, 'T', '_');
+    AGBT17B_221_02.scans{i} = my_stamp;
+end
+
+% Frequency mask
+bad_freqs = [];
+AGBT17B_221_02.bad_freqs = bad_freqs;
+
+% Element mappings
+X = [1:7, 35, 9:12, 14, 13, 15:19];
+Y = [21, 20, 23:34, 36:38]; % [21, 20, 23:34, 8, 36:39];
+goodX = X; % goodX(X < 9) = [];
+goodY = Y;
+% goodY(Y==33) = [];
+
+AGBT17B_221_02.X = X;
+AGBT17B_221_02.Y = Y;
+AGBT17B_221_02.goodX = goodX;
+AGBT17B_221_02.goodY = goodY;
+
+AGBT17B_221_02.fudge = 0;
+AGBT17B_221_02.Xdims = [-0.23, 0.23];
+AGBT17B_221_02.Ydims = [-0.23, 0.23];
+                
+AGBT17B_221_02.beam_el = [ 3.94, 3.94,  0.0, 0.0, 0.0, -3.94, -3.94]*1/60;
+AGBT17B_221_02.beam_az = [-2.275, 2.275, -4.55, 0.0, 4.55, -2.275,  2.275]*1/60;
+
+%% AGBT17B_221_03
+% % Scan numbers and time stamps
+AGBT17B_221_03.session_name = 'AGBT17B_221_03';
+log_filename = sprintf('%s/%s_03/ScanLog.fits', meta_root, proj_id_3);
+scan_data = fitsread(log_filename, 'bintable', 1);
+time_stamps = unique(scan_data{1});
+
+for i = 1:length(time_stamps)
+    my_stamp = time_stamps{i};
+    my_stamp = strrep(my_stamp, '-', '_');
+    my_stamp = strrep(my_stamp, 'T', '_');
+    AGBT17B_221_03.scans{i} = my_stamp;
+end
+
+% Frequency mask
+bad_freqs = [];
+AGBT17B_221_03.bad_freqs = bad_freqs;
+
+% Element mappings
+X = [1:7, 35, 9:12, 14, 13, 15:19];
+Y = [21, 20, 23:34, 36:38]; % [21, 20, 23:34, 8, 36:39];
+goodX = X; % goodX(X < 9) = [];
+goodY = Y;
+% goodY(Y==33) = [];
+
+AGBT17B_221_03.X = X;
+AGBT17B_221_03.Y = Y;
+AGBT17B_221_03.goodX = goodX;
+AGBT17B_221_03.goodY = goodY;
+
+AGBT17B_221_03.fudge = 0;
+AGBT17B_221_03.Xdims = [-0.23, 0.23];
+AGBT17B_221_03.Ydims = [-0.23, 0.23];
+                
+AGBT17B_221_03.beam_el = [ 3.94, 3.94,  0.0, 0.0, 0.0, -3.94, -3.94]*1/60;
+AGBT17B_221_03.beam_az = [-2.275, 2.275, -4.55, 0.0, 4.55, -2.275,  2.275]*1/60;

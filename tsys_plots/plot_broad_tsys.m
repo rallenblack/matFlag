@@ -15,7 +15,18 @@ scans = {[112, 113],...
          [130, 131],...
          [132, 133],...
          [134, 135]};
-pol = 'Y';
+     
+% session = AGBT16B_400_05;
+% scans = {[4, 5],...
+%          [6, 7],...
+%          [8, 9],...
+%          [10, 11],...
+%          [12, 13],...
+%          [14, 15],...
+%          [16, 17],...
+%          [19, 20]};
+     
+pol = 'X';
 
 raw_fig = figure();
 pruned_fig = figure();
@@ -36,9 +47,9 @@ for scan = 1:length(scans)
     figure(raw_fig);
     hold on;
     plot(freqs,real(Tsys_eta).', '-b');
-    title('T_s_y_s/\eta_a_p vs Frequency');
+    title('T_s_y_s/\eta vs Frequency');
     xlabel('Frequency (MHz)');
-    ylabel('T_s_y_s/\eta_a_p (K)');
+    ylabel('T_s_y_s/\eta (K)');
     grid on;
     hold off;
     
@@ -59,9 +70,9 @@ for scan = 1:length(scans)
     figure(pruned_fig);
     hold on;
     plot(freqs,real(Tsys_eta).', '-b');
-    title('T_s_y_s/\eta_a_p vs Frequency');
+    title('T_s_y_s/\eta vs Frequency');
     xlabel('Frequency (MHz)');
-    ylabel('T_s_y_s/\eta_a_p (K)');
+    ylabel('T_s_y_s/\eta (K)');
     grid on;
     hold off;
         

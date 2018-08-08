@@ -14,8 +14,9 @@ session = AGBT16B_400_12;
 note = 'grid';
 
 % Output filename
-rtbf_filename = sprintf('%s/%s/BF/w_14.bin', data_root,...
-    session.session_name);
+rtbf_filename = sprintf('%s/%s/BF/w_%s_%s.bin', data_root,...
+    session.session_name, session.session_name, note);
+% rtbf_filename = sprintf('%s/w_221_03.bin', weight_dir);
 
 % Element mapping
 X_idx = session.goodX;
@@ -68,11 +69,11 @@ for pol_idx = 1:2
         text(0.05, 0.5, my_ylabel, 'HorizontalAlignment', 'center', 'Units', 'normalized', 'FontSize', 10, 'FontWeight', 'bold', 'Rotation', 90);
 
         % Save figure
-        fig_filename = sprintf('pattern_plots/Grid%s/%s_%spol_formed_beams', session.session_name(14), session.session_name, pol);
-        %saveas(map_fig, sprintf('%s.png', fig_filename));
-        %saveas(map_fig, sprintf('%s.pdf', fig_filename));
-        %saveas(map_fig, sprintf('%s.eps', fig_filename));
-        %saveas(map_fig, sprintf('%s.fig', fig_filename), 'fig');
+        fig_filename = sprintf('pattern_plots/%s/%s_%spol_%s_formed_beams', session.session_name, session.session_name, pol, note);
+        saveas(map_fig, sprintf('%s.png', fig_filename));
+        saveas(map_fig, sprintf('%s.pdf', fig_filename));
+        saveas(map_fig, sprintf('%s.eps', fig_filename));
+        saveas(map_fig, sprintf('%s.fig', fig_filename), 'fig');
     end
 end
 

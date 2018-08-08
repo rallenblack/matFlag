@@ -52,6 +52,10 @@ onoffs{idx,4} = source;
 onoffs{idx,5} = LO_freq;
 idx = idx + 1;
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 1st Frequency sweep
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % AGBT16B_400_05 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 session = AGBT16B_400_05;
 on_scan = 2;  off_scan = 3;
@@ -272,3 +276,105 @@ onoffs{idx,3} = off_scan;
 onoffs{idx,4} = source;
 onoffs{idx,5} = LO_freq;
 idx = idx + 1;
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2nd Frequency sweep
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+idx = 1;
+% AGBT17B_360_06 LO = 1075 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+onoffs_7pt = {};
+
+session = AGBT17B_360_06;
+on_scan = [6:12];
+off_scan = [5,13];
+source = source3C48;
+LO_freq = 1075;
+onoffs_7pt{idx,1} = session;
+onoffs_7pt{idx,2} = on_scan;
+onoffs_7pt{idx,3} = off_scan;
+onoffs_7pt{idx,4} = source;
+onoffs_7pt{idx,5} = LO_freq;
+idx = idx + 1;
+
+
+% AGBT17B_360_06 LO = 1250 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+session = AGBT17B_360_06;
+on_scan = [15:21];
+off_scan = [14,22];
+source = source3C48;
+LO_freq = 1250;
+onoffs_7pt{idx,1} = session;
+onoffs_7pt{idx,2} = on_scan;
+onoffs_7pt{idx,3} = off_scan;
+onoffs_7pt{idx,4} = source;
+onoffs_7pt{idx,5} = LO_freq;
+idx = idx + 1;
+
+% AGBT17B_360_06 LO = 1350 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+session = AGBT17B_360_06;
+on_scan = [24:30];
+off_scan = [23,31];
+source = source3C48;
+LO_freq = 1350;
+onoffs_7pt{idx,1} = session;
+onoffs_7pt{idx,2} = on_scan;
+onoffs_7pt{idx,3} = off_scan;
+onoffs_7pt{idx,4} = source;
+onoffs_7pt{idx,5} = LO_freq;
+idx = idx + 1;
+
+% AGBT17B_360_06 LO = 1550 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+session = AGBT17B_360_06;
+on_scan = [33:39];
+off_scan = [32,40];
+source = source3C48;
+LO_freq = 1550;
+onoffs_7pt{idx,1} = session;
+onoffs_7pt{idx,2} = on_scan;
+onoffs_7pt{idx,3} = off_scan;
+onoffs_7pt{idx,4} = source;
+onoffs_7pt{idx,5} = LO_freq;
+idx = idx + 1;
+
+% AGBT17B_360_06 LO = 1650 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+session = AGBT17B_360_06;
+on_scan = [42:48];
+off_scan = [41,49];
+source = source3C48;
+LO_freq = 1650;
+onoffs_7pt{idx,1} = session;
+onoffs_7pt{idx,2} = on_scan;
+onoffs_7pt{idx,3} = off_scan;
+onoffs_7pt{idx,4} = source;
+onoffs_7pt{idx,5} = LO_freq;
+idx = idx + 1;
+
+% AGBT17B_360_06 LO = 1750 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+session = AGBT17B_360_06;
+on_scan = [51:57];
+off_scan = [50,58];
+source = source3C48;
+LO_freq = 1750;
+onoffs_7pt{idx,1} = session;
+onoffs_7pt{idx,2} = on_scan;
+onoffs_7pt{idx,3} = off_scan;
+onoffs_7pt{idx,4} = source;
+onoffs_7pt{idx,5} = LO_freq;
+idx = idx + 1;
+
+% AGBT17B_360_06 LO = 1450 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+session = AGBT17B_360_06;
+on_scan = [63:69];
+off_scan = [62,70];
+source = source3C48;
+LO_freq = 1450;
+onoffs_7pt{idx,1} = session;
+onoffs_7pt{idx,2} = on_scan;
+onoffs_7pt{idx,3} = off_scan;
+onoffs_7pt{idx,4} = source;
+onoffs_7pt{idx,5} = LO_freq;
+idx = idx + 1;
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
