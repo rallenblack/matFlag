@@ -16,7 +16,7 @@ scan_table; % Found in kernel directory
 % Project directory
 % proj_ID = 'TGBT16A_508_01';
 % Dir = sprintf('/lustre/gbtdata/%s/TMP/BF',proj_ID);
-Dir = '/lustre/projects/flag/TMP/BF/';
+Dir = '/lustre/flag/TMP/BF/';
 
 % Bank strings
 banks = {'A', 'B', 'C', 'D',...
@@ -29,7 +29,7 @@ banks = {'A', 'B', 'C', 'D',...
 
 % for i = 1:length(scan_nums)
 % tstamp = session.scans{scan_nums(i)};
-tstamp = '2018_01_25_03:57:29';
+tstamp = '2019_03_10_21:46:49'; % '2019_03_01_20:27:28';
 
 for bank_idx = 1:length(banks)
     bank_str = banks{bank_idx};
@@ -73,7 +73,7 @@ for s = 1:Nsti
     Bint(:,:,:,s) = mean(Bout(:,:,:,int_length*(s-1)+1:s*int_length),4);
 end
 %     Bint(:,:,[1:75, 90, 122, 138, 154, 170, 186, 202, 218, 234, 250, 425:500],:) = NaN;
-% Bint(:,:,250,:) = NaN;
+Bint(:,:,250,:) = NaN;
 LO_freq = 1450;
 fr = ((-249:250)*303.75e-3) + LO_freq;
 % figure(1);

@@ -26,6 +26,8 @@ Nsamp_window = 20;
 overlay_plot = figure();
 hold on;
 for pol_idx = 1:length(pol)
+    Tsys_broad = [];
+    freqs_broad = [];
     for scan = 1:length(scans)
         filename = sprintf('figures/%s_scans%d_%d_%spol_tsys.mat',...
             session.session_name, scans{scan}(1), scans{scan}(2), pol(pol_idx));
@@ -51,7 +53,12 @@ for pol_idx = 1:length(pol)
         % Plot initial bandpass
 %         figure(raw_fig);
         h(pol_idx,scan) = plot(freqs,real(Tsys_eta).', ['-',line_col(pol_idx)]);
+        Tsys_broad = [Tsys_broad, Tsys_eta.'];
+        freqs_broad = [freqs_broad, freqs];
     end
+    Tsys_filename = sprintf('Tsys_Aug_2017_%s_pol.mat', pol(pol_idx));
+    fprintf('Saving Tsys data points to %s\n', Tsys_filename);
+    save(Tsys_filename, 'Tsys_broad', 'freqs_broad');
 end
 
 session = AGBT16B_400_05;
@@ -65,6 +72,8 @@ scans_05 = {[4, 5],...
          [19, 20]};
 
 for pol_idx = 1:length(pol)
+    Tsys_broad = [];
+    freqs_broad = [];
     for scan = 1:length(scans_05)
         filename = sprintf('figures/%s_scans%d_%d_%spol_tsys.mat',...
             session.session_name, scans_05{scan}(1), scans_05{scan}(2), pol(pol_idx));
@@ -90,7 +99,12 @@ for pol_idx = 1:length(pol)
         % Plot initial bandpass
 %         figure(raw_fig);
         h1(pol_idx,scan) = plot(freqs,real(Tsys_eta).', ['-',line_col(pol_idx+2)]);
+        Tsys_broad = [Tsys_broad, Tsys_eta.'];
+        freqs_broad = [freqs_broad, freqs];
     end
+    Tsys_filename1 = sprintf('Tsys_May_2017_%s_pol.mat', pol(pol_idx));
+    fprintf('Saving Tsys data points to %s\n', Tsys_filename1);
+    save(Tsys_filename1, 'Tsys_broad', 'freqs_broad');
 end
 
 
@@ -104,6 +118,8 @@ scans_06 = {[5,13],...
          [62,70]};
 
 for pol_idx = 1:length(pol)
+    Tsys_broad = [];
+    freqs_broad = [];
     for scan = 1:length(scans_06)
         filename = sprintf('figures/%s_scans%d_%d_%spol_tsys.mat',...
             session.session_name, scans_06{scan}(1), scans_06{scan}(2), pol(pol_idx));
@@ -132,7 +148,12 @@ for pol_idx = 1:length(pol)
         % Plot initial bandpass
 %         figure(raw_fig);
         h2(pol_idx,scan) = plot(freqs,real(Tsys_eta(maxSens_idx(pol_idx),:)).', ['-',line_col(pol_idx+4)]);
+        Tsys_broad = [Tsys_broad, Tsys_eta(maxSens_idx(pol_idx),:)];
+        freqs_broad = [freqs_broad, freqs];
     end
+    Tsys_filename2 = sprintf('Tsys_Feb_2018_%s_pol.mat', pol(pol_idx));
+    fprintf('Saving Tsys data points to %s\n', Tsys_filename2);
+    save(Tsys_filename2, 'Tsys_broad', 'freqs_broad');
 end
 
 %%%%% GBT model %%%%%%%%
@@ -192,7 +213,7 @@ ylabel('T_s_y_s/\eta (K)');
 %     'GBT2 model - X', 'GBT2 model - Y'});
 [lpos, ~] = legend([h1(1,1),h1(2,1),h(1,1),h(2,1),h2(1,1),h2(2,1),h3(1,1),h3(2,1), h4(1,1)], {'May 2017 - X', 'May 2017 - Y', ...
     'Aug 2017 - X', 'Aug 2017 - Y','Feb 2018 - X', 'Feb 2018 - Y', ...
-    'GBT2 model - X', 'GBT2 model - Y', 'GBO model'});
+    'GBT2 model - X', 'GBT2 model - Y', 'NRAO model'});
 set(lpos,'position',[0.5,0.75,0,0]); % bottom,top,width,height
 xlim([1000, 1725]);
 ylim([0, 200]);

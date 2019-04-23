@@ -6,12 +6,12 @@ clearvars;
 addpath ../kernel/
 
 % setup file info
-dir = '/lustre/projects/flag/';
+dir = '/lustre/flag/';
 proj_id = '/TMP';
 session = '/BF/';
 
 % scan time
-tstamp = '2018_02_07_13:03:11';
+tstamp = '2019_03_20_14:24:36';
 
 % system parameters
 Nele = 40;                             % Antenna Elements
@@ -25,6 +25,7 @@ banks = {'A', 'B', 'C', 'D',...
     'I', 'J', 'K', 'L',...
     'M', 'N', 'O', 'P',...
     'Q', 'R', 'S', 'T'};
+
 chan_idx = [1:5, 101:105, 201:205, 301:305, 401:405];
 
 % Extract data from FITS files
@@ -43,6 +44,6 @@ end
 R(:,:,[1:10, 248:252, 490:499]) = 0;
 
 % compute delays relative to first element to determine max delay
-ref_el = 19;
+ref_el = 24;
 tmp_delta_n = compute_delay(R, freqs, fs, ref_el);
 round(tmp_delta_n)

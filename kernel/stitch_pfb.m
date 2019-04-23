@@ -11,9 +11,11 @@ end
 
 Rtot = [];
 
-el = 4;
-tstamp = '2017_08_04_15:09:11';
-dir = '/lustre/projects/flag/AGBT16B_400_13/BF/'; %/TMP/BF/ 
+el = 1;
+%tstamp = '2017_08_04_15:09:11';
+tstamp = '2019_03_14_11:14:22';
+%dir = '/lustre/projects/flag/AGBT16B_400_13/BF/'; %/TMP/BF/
+dir = '/users/mburnett/tmp/';
 fname = [dir,tstamp];
 
 int_idx_start = 1;

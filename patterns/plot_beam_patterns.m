@@ -10,13 +10,13 @@ addpath ../kernel/
 scan_table; % Found in kernel directory
 
 % Desired session
-session = AGBT16B_400_12;
-note = 'grid';
+session = AGBT19A_365_06; %AGBT16B_400_12;
+note = 'grid'; % 'grid';
 
 % Output filename
-rtbf_filename = sprintf('%s/%s/BF/w_%s_%s.bin', data_root,...
-    session.session_name, session.session_name, note);
-% rtbf_filename = sprintf('%s/w_221_03.bin', weight_dir);
+rtbf_filename = sprintf('%s/%s/BF/mat/w_%s_%s.bin', data_root,...
+     session.session_name, session.session_name, note);
+%rtbf_filename = sprintf('%s/w116_01.bin', weight_dir);
 
 % Element mapping
 X_idx = session.goodX;
@@ -44,6 +44,10 @@ for pol_idx = 1:2
     % Generate patterns
     [AZ, EL, patterns] = get_beamformed_patterns(session, pol, note, w);
 
+    patt_filename = sprintf('pattern_plots/%s/%s_%spol_%s_formed_beams.mat', session.session_name, session.session_name, pol, note);
+    fprintf('Saving patterns, az and el to %s\n', patt_filename);
+    save(patt_filename, 'AZ', 'EL', 'patterns');
+    
     if 1
         % Plot patterns
         map_fig = plot_hex(session, AZ, EL, patterns);
@@ -69,11 +73,11 @@ for pol_idx = 1:2
         text(0.05, 0.5, my_ylabel, 'HorizontalAlignment', 'center', 'Units', 'normalized', 'FontSize', 10, 'FontWeight', 'bold', 'Rotation', 90);
 
         % Save figure
-        fig_filename = sprintf('pattern_plots/%s/%s_%spol_%s_formed_beams', session.session_name, session.session_name, pol, note);
-        saveas(map_fig, sprintf('%s.png', fig_filename));
-        saveas(map_fig, sprintf('%s.pdf', fig_filename));
-        saveas(map_fig, sprintf('%s.eps', fig_filename));
-        saveas(map_fig, sprintf('%s.fig', fig_filename), 'fig');
+%         fig_filename = sprintf('pattern_plots/%s/%s_%spol_%s_formed_beams', session.session_name, session.session_name, pol, note);
+%         saveas(map_fig, sprintf('%s.png', fig_filename));
+%         saveas(map_fig, sprintf('%s.pdf', fig_filename));
+%         saveas(map_fig, sprintf('%s.eps', fig_filename));
+%         saveas(map_fig, sprintf('%s.fig', fig_filename), 'fig');
     end
 end
 

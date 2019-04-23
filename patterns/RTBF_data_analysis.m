@@ -152,7 +152,7 @@ end
 
 % beam(:,:,[1:5,21:25],:) = NaN;
 figure(5);
-for i = 2:2 % N_beam
+for i = 4:4 % N_beam
     for k = 1:1 % Order: XX*, YY*, real(XY*), and imag(XY*).
         imagesc(squeeze((abs(beam(i,k,:,1:100))))); % Order: beam, pol, bin, and sti.
         title(['Beam ' num2str(i)]);

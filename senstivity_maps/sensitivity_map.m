@@ -17,7 +17,7 @@ source_table; % Found in kernel directory
 tic;
 
 quick_map = 0;
-overwrite = 1;
+overwrite = 0;
 overwrite = overwrite | quick_map;
 
 % % AGBT16B_400_01 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -190,13 +190,13 @@ overwrite = overwrite | quick_map;
 % note = '1st_seven';
 
 % AGBT17B_360_02 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-session = AGBT17B_360_02;
-% % % Calibrator
-on_scans = [24:28,30:34,36:40,42:46,48:52,54:58,60:63];
-off_scans = [29,35,41,47,53,59];
-source = source3C147;
-Nint = 2;
-note = 'grid';
+% session = AGBT17B_360_02;
+% % % % Calibrator
+% on_scans = [24:28,30:34,36:40,42:46,48:52,54:58,60:63];
+% off_scans = [29,35,41,47,53,59];
+% source = source3C147;
+% Nint = 2;
+% note = 'grid';
 
 % AGBT17B_360_02 2nd Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % session = AGBT17B_360_02;
@@ -436,6 +436,217 @@ note = 'grid';
 % Nint = -1;
 % note = 'seven';
 
+% AGBT19A_407_01 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% session = AGBT19A_407_01;
+% % % % % Calibrator
+% on_scans = [2:8];
+% off_scans = [1,9];
+% source = source3C295;
+% Nint = -1;
+% note = 'seven';
+
+% AGBT19A_407_01 Seven-pt cal 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% session = AGBT19A_407_01;
+% % % % % Calibrator
+% on_scans = [21:27];
+% off_scans = [20,28];
+% source = source3C295;
+% Nint = -1;
+% note = 'seven';
+
+% AGBT19A_407_01 Seven-pt cal 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% session = AGBT19A_407_01;
+% % % % % Calibrator
+% on_scans = [30:36];
+% off_scans = [29,37];
+% source = source3C295;
+% Nint = -1;
+% note = 'seven';
+
+
+% AGBT19A_407_01 Seven-pt cal 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% session = AGBT19A_407_01;
+% % % % Calibrator
+% on_scans = [39:45];
+% off_scans = [38,46];
+% source = source3C295;
+% Nint = -1;
+% note = 'seven';
+
+% AGBT19A_407_01 Seven-pt cal 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% session = AGBT19A_221_01;
+% % % % Calibrator
+% on_scans = [2:8];
+% off_scans = [1,9];
+% source = source3C295;
+% Nint = -1;
+% note = 'seven';
+
+% AGBT19A_407_02 Seven-pt cal 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%session = AGBT19A_407_02;
+% % % Calibrator
+%on_scans = [12:18];
+%off_scans = [11,19];
+%source = source3C348;
+%Nint = -1;
+%note = 'seven';
+
+% AGBT19A_407_03 Seven-pt cal 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%session = AGBT19A_407_03;
+% % % Calibrator
+%on_scans = [2:8];
+%off_scans = [1,9];
+%source = source3C295;
+%Nint = -1;
+%note = 'seven';
+
+
+% AGBT19A_407_03 Seven-pt cal 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%session = AGBT19A_221_03;
+% % % Calibrator
+%on_scans = [2:8];
+%off_scans = [1,9];
+%source = source3C123;
+%Nint = -1;
+%note = 'seven';
+
+% AGBT17B_221_01 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% session = AGBT19A_116_01;
+% % % % % Calibrator
+%on_scans = [7:13];
+%off_scans = [6,14];
+%source = source3C295;
+%Nint = -1;
+%note = 'seven';
+
+% AGBT18B_358_02 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%session = AGBT18B_358_02;
+% % % % % Calibrator
+%on_scans = [3:9];
+%off_scans = [2,10];
+%source = source3C48;
+%Nint = -1;
+%note = 'seven';
+
+
+% AGBT18B_358_03 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%session = AGBT18B_358_03;
+% % % % Calibrator
+%on_scans = [7:11,13:17,19:23,25:29,31:35,37:41,43:46]+1;
+%off_scans = [12,18,24,30,36,42]+1;
+%source = source3C295;
+%Nint = 2;
+%note = 'grid';
+
+% AGBT18B_358_03 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%session = AGBT18B_358_03;
+% % % % % Calibrator
+%on_scans = [48:54];
+%off_scans = [47,55];
+%source = source3C295;
+%Nint = -1;
+%note = 'seven';
+ 
+% AGBT18B_358_06 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%session = AGBT18B_358_06;
+% % % % % Calibrator
+%on_scans = [4:10];
+%off_scans = [3,11];
+%source = source3C295;
+%Nint = -1;
+%note = 'seven';
+
+% AGBT18B_358_07 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%session = AGBT18B_358_07;
+% % % % % Calibrator
+%on_scans = [6:12];
+%off_scans = [5,13];
+%source = source3C295;
+%Nint = -1;
+%note = 'seven';
+ 
+% AGBT19A_091_02 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+session = AGBT19A_091_02;
+% % % % % Calibrator
+%on_scans = [2:8];
+%off_scans = [1,9];
+%source = source3C48;
+%Nint = -1;
+%note = 'seven';
+
+% AGBT19A_091_03 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%session = AGBT19A_091_03;
+% % % % % Calibrator
+%on_scans = [2:8];
+%off_scans = [1,9];
+%source = source3C48;
+%Nint = -1;
+%note = 'seven';
+
+% AGBT19A_091_04 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%session = AGBT19A_091_04;
+% % % % % Calibrator
+%on_scans = [2:8];
+%off_scans = [1,9];
+%source = source3C48;
+%Nint = -1;
+%note = 'seven';
+
+% AGBT19A_091_05 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%session = AGBT19A_091_05;
+% % % % % Calibrator
+%on_scans = [2:8];
+%off_scans = [1,9];
+%source = source3C48;
+%Nint = -1;
+%note = 'seven';
+
+% AGBT19A_365_01 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%session = AGBT19A_365_01;
+% % % % % Calibrator
+%on_scans = [6:12];
+%off_scans = [5,13];
+%source = source3C48;
+%Nint = -1;
+%note = 'seven';
+
+% AGBT19A_365_02 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%session = AGBT19A_365_02;
+% % % % % Calibrator
+%on_scans = [11:17];
+%off_scans = [10,18];
+%source = source3C48;
+%Nint = -1;
+%note = 'seven';
+
+% AGBT19A_365_03 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%session = AGBT19A_365_03;
+% % % % Calibrator
+%on_scans = [14:18,20:24,26:30,32:36,38:42,44:48,50:53];
+%off_scans = [19,25,31,37,43,49];
+%source = source3C147;
+%Nint = 2;
+%note = 'grid';
+
+% AGBT19A_365_03 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%session = AGBT19A_365_03;
+% % % % % Calibrator
+%on_scans = [55:61];
+%off_scans = [54,62];
+%source = source3C147;
+%Nint = -1;
+%note='seven';
+
+% AGBT19A_365_06 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+session = AGBT19A_365_06;
+% % % % Calibrator
+on_scans = [2:6,8:12,14:18,20:24,26:30,32:36,38:41]+1;
+off_scans = [7,13,19,25,31,37]+1;
+source = source3C48;
+Nint = 2;
+note = 'grid';
+
+
 for p_idx = 1:2
     if p_idx == 1
         pol = 'X';
@@ -666,11 +877,11 @@ for p_idx = 1:2
     end
 
     % Save figure
-    sens_map_filename = sprintf('%s/%s_%spol_map_%s', session.session_name, session.session_name, pol, note);
-    saveas(map_fig, sprintf('%s.png', sens_map_filename));
-    saveas(map_fig, sprintf('%s.pdf', sens_map_filename));
-    saveas(map_fig, sprintf('%s.eps', sens_map_filename));
-    saveas(map_fig, sprintf('%s.fig', sens_map_filename), 'fig');
+%     sens_map_filename = sprintf('%s/%s_%spol_map_%s', session.session_name, session.session_name, pol, note);
+%     saveas(map_fig, sprintf('%s.png', sens_map_filename));
+%     saveas(map_fig, sprintf('%s.pdf', sens_map_filename));
+%     saveas(map_fig, sprintf('%s.eps', sens_map_filename));
+%     saveas(map_fig, sprintf('%s.fig', sens_map_filename), 'fig');
 
     % Get the angle of arrival for max sensitivity beam
     [s_max,max_idx(p_idx)] = max(Sens(:,sens_freq));
@@ -704,9 +915,9 @@ end
 
     
 tsys_fig = figure();
-plot(freq,squeeze(Tsys_eta_pruned(1,max_idx(1),:)).');
+plot(freq,squeeze(Tsys_eta_pruned(1,max_idx(1),:)).','LineWidth',2);
 hold on;
-plot(freq,squeeze(Tsys_eta_pruned(2,max_idx(2),:)).');
+plot(freq,squeeze(Tsys_eta_pruned(2,max_idx(2),:)).','LineWidth',2);
 hold off;
 title('T_s_y_s/\eta vs Frequency');
 legend('X-polarization', 'Y-polarization');
@@ -716,12 +927,12 @@ ylabel('T_s_y_s/\eta (K)');
 grid on;
 
 % Save figure
-tsys_filename = sprintf('%s/%s_tsys_%s', session.session_name, session.session_name, note);
-print('-dpng', '-r0', sprintf('%s.png', tsys_filename)); % increase resolution with print(fileType,resolution(dpi),filename)
-saveas(tsys_fig, sprintf('%s.png', tsys_filename));
-saveas(tsys_fig, sprintf('%s.pdf', tsys_filename));
-saveas(tsys_fig, sprintf('%s.eps', tsys_filename));
-saveas(tsys_fig, sprintf('%s.fig', tsys_filename), 'fig');
+% tsys_filename = sprintf('%s/%s_tsys_%s', session.session_name, session.session_name, note);
+% print('-dpng', '-r0', sprintf('%s.png', tsys_filename)); % increase resolution with print(fileType,resolution(dpi),filename)
+% saveas(tsys_fig, sprintf('%s.png', tsys_filename));
+% saveas(tsys_fig, sprintf('%s.pdf', tsys_filename));
+% saveas(tsys_fig, sprintf('%s.eps', tsys_filename));
+% saveas(tsys_fig, sprintf('%s.fig', tsys_filename), 'fig');
     
 for p_idx = 1:2
     if p_idx == 1

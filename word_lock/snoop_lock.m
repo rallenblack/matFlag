@@ -8,12 +8,12 @@ addpath ../kernel/
 res_file = 'residuals1.mat';
 
 % setup file info
-dir = '/lustre/projects/flag/';
+dir = '/lustre/flag/';
 proj_id = '/TMP';
 session = '/BF/';
 
 % scan time
-tstamp = '2018_02_07_13:01:36'; % '2017_07_27_21:43:51';
+tstamp = '2019_03_20_14:21:45'; % '2017_07_27_21:43:51';
 
 % system parameters
 Nele = 40;                             % Antenna Elements
