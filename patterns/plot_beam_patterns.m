@@ -10,8 +10,8 @@ addpath ../kernel/
 scan_table; % Found in kernel directory
 
 % Desired session
-session = AGBT19A_365_06; %AGBT16B_400_12;
-note = 'grid'; % 'grid';
+session = AGBT17B_455_01; %AGBT16B_400_12;
+note = '2nd_seven'; % 'grid';
 
 % Output filename
 rtbf_filename = sprintf('%s/%s/BF/mat/w_%s_%s.bin', data_root,...

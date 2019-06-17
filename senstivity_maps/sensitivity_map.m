@@ -17,7 +17,7 @@ source_table; % Found in kernel directory
 tic;
 
 quick_map = 0;
-overwrite = 0;
+overwrite = 1;
 overwrite = overwrite | quick_map;
 
 % % AGBT16B_400_01 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -29,21 +29,21 @@ overwrite = overwrite | quick_map;
 % source = source3C295;
 
 % % AGBT16B_400_02 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% session = AGBT16B_400_02;
-% on_scans = [13:15, 17:19, 21:23, 25:27, 29:31,...
+%session = AGBT16B_400_02;
+%on_scans = [13:15, 17:19, 21:23, 25:27, 29:31,...
 %             33:35, 37:39, 41:43, 45:47, 49:51, 53:55];
-% off_scans = [16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56];
-% source = source3C295;
-% Nint = 10;
-% note = 'grid';
+%off_scans = [16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56];
+%source = source3C295;
+%Nint = 10;
+%note = 'grid';
 
 % AGBT16B_400_03 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% session = AGBT16B_400_03;
-% on_scans = [12:14, 16:18, 20:22, 24:26, 28:30, 32:34, 36:38, 40:42, 44:46, 48:50, 52:54];
-% off_scans = [15, 19, 23, 27, 31, 35, 39, 43, 47, 51];
-% source = source3C295;
-% Nint = 10;
-% note = 'grid';
+%session = AGBT16B_400_03;
+%on_scans = [12:14, 16:18, 20:22, 24:26, 28:30, 32:34, 36:38, 40:42, 44:46, 48:50, 52:54];
+%off_scans = [15, 19, 23, 27, 31, 35, 39, 43, 47, 51];
+%source = source3C295;
+%Nint = 10;
+%note = 'grid';
 
 % % HI Source M101 - CALCORR
 % on_scans = 56;
@@ -67,18 +67,18 @@ overwrite = overwrite | quick_map;
 % off_scans = [23, 25];
 
 % AGBT16B_400_09 Seven Beams %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% session = AGBT16B_400_09;
+%session = AGBT16B_400_09;
 % % ON/OFF
 % on_scans = 5; 
 % off_scans = 12;
 % % Calibrator
-% on_scans = [7:11, 13:17, 19:23, 25:29, 34:38, 40:44, 46:47]; % 5; % 16& 17 bad blocks(B,C,D), 29 & 31 Bank L did not start
-% off_scans = [12, 18, 24, 30, 39, 45]; % 12; % 30 Bank L stalled
+%on_scans = [7:11, 13:17, 19:23, 25:29, 34:38, 40:44, 46:47]; % 5; % 16& 17 bad blocks(B,C,D), 29 & 31 Bank L did not start
+%off_scans = [12, 18, 24, 30, 39, 45]; % 12; % 30 Bank L stalled
 % on_scans = [5 5 5 5 5 5 5];
 % off_scans = 6;
-% source = source3C48;
-% Nint = -1;
-% note = 'seven';
+%source = source3C48;
+%Nint = 2;
+%note = 'grid';
 
 % AGBT16B_400_11 Seven Beams %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % session = AGBT16B_400_11;
@@ -90,14 +90,14 @@ overwrite = overwrite | quick_map;
 % note = 'seven';
 
 % AGBT16B_400_12 Seven Beams %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% session = AGBT16B_400_12;
+%session = AGBT16B_400_12;
 % Calibrator
-% on_scans = [131:137];
-% off_scans = [130, 138];
-% off_scans = [130];
-% source = source3C48;
-% Nint = -1;
-% note = 'seven';
+%on_scans = [131:137];
+%off_scans = [130, 138];
+%off_scans = [130];
+%source = source3C48;
+%Nint = -1;
+%note = 'seven';
 
 % AGBT16B_400_12 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % session = AGBT16B_400_12;
@@ -118,13 +118,13 @@ overwrite = overwrite | quick_map;
 % note = 'grid';
 
 % AGBT16B_400_13 Seven pt Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% session = AGBT16B_400_13;
+%session = AGBT16B_400_13;
 % % % Calibrator
-% on_scans = [102:108];
-% off_scans = [101,109];
-% source = source3C123;
-% Nint = -1;
-% note = 'seven';
+%on_scans = [102:108];
+%off_scans = [101,109];
+%source = source3C123;
+%Nint = -1;
+%note = 'seven';
 
 % AGBT16B_400_14 On/Off %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % session = AGBT16B_400_14;
@@ -135,86 +135,86 @@ overwrite = overwrite | quick_map;
 % Nint = 10;
 
 % AGBT16B_400_14 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% session = AGBT16B_400_14;
+%session = AGBT16B_400_14;
 % % % % % Calibrator
-% on_scans = [17:23];
-% off_scans = [16,24];
-% source = source3C147;
-% Nint = -1;
-% note = 'seven';
+%on_scans = [17:23];
+%off_scans = [16,24];
+%source = source3C147;
+%Nint = -1;
+%note = 'seven';
 
 % AGBT16B_400_14 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% session = AGBT16B_400_14;
+%session = AGBT16B_400_14;
 % % % % Calibrator
-% on_scans = [25:29, 31:35, 44:48, 50:54, 56:60, 62:66, 68:71];
-% off_scans = [30, 36, 49, 61, 67];
-% source = source3C147;
-% Nint = 2;
-% note = 'grid';
+%on_scans = [25:29, 31:35, 44:48, 50:54, 56:60, 62:66, 68:71];
+%off_scans = [30, 36, 49, 61, 67];
+%source = source3C147;
+%Nint = 2;
+%note = 'grid';
 
 
 % AGBT17B_360_01 1st Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% session = AGBT17B_360_01;
+%session = AGBT17B_360_01;
 % % % % % Calibrator
-% on_scans = [11:17];
-% off_scans = [10,18];
-% source = source3C295;
-% Nint = -1;
-% note = '1st_seven';
+%on_scans = [11:17];
+%off_scans = [10,18];
+%source = source3C295;
+%Nint = -1;
+%note = '1st_seven';
 
 % AGBT17B_360_01 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% session = AGBT17B_360_01;
+%session = AGBT17B_360_01;
 % % % Calibrator
-% on_scans = [19:23,25:29,31:35,37:41,43:47,49:53,55:58];
-% off_scans = [24,30,36,42,48,54];
-% source = source3C295;
-% Nint = 2;
-% note = 'grid';
+%on_scans = [19:23,25:29,31:35,37:41,43:47,49:53,55:58];
+%off_scans = [24,30,36,42,48,54];
+%source = source3C295;
+%Nint = 2;
+%note = 'grid';
 
 % AGBT17B_360_01 2nd Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% session = AGBT17B_360_01;
+%session = AGBT17B_360_01;
 % % % % % Calibrator
-% on_scans = [60:66];
-% off_scans = [59,67];
-% source = source3C295;
-% Nint = -1;
-% note = '2nd_seven';
+%on_scans = [60:66];
+%off_scans = [59,67];
+%source = source3C295;
+%Nint = -1;
+%note = '2nd_seven';
 
-% AGBT17B_360_02 1st Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% session = AGBT17B_360_02;
+%% AGBT17B_360_02 1st Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%session = AGBT17B_360_02;
 % % % % % Calibrator
-% on_scans = [13:19];
-% off_scans = [12,20];
-% source = source3C147;
-% Nint = -1;
-% note = '1st_seven';
+%on_scans = [13:19];
+%off_scans = [12,20];
+%source = source3C147;
+%Nint = -1;
+%note = '1st_seven';
 
 % AGBT17B_360_02 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% session = AGBT17B_360_02;
+%session = AGBT17B_360_02;
 % % % % Calibrator
-% on_scans = [24:28,30:34,36:40,42:46,48:52,54:58,60:63];
-% off_scans = [29,35,41,47,53,59];
-% source = source3C147;
-% Nint = 2;
-% note = 'grid';
+%on_scans = [24:28,30:34,36:40,42:46,48:52,54:58,60:63];
+%off_scans = [29,35,41,47,53,59];
+%source = source3C147;
+%Nint = 2;
+%note = 'grid';
 
 % AGBT17B_360_02 2nd Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% session = AGBT17B_360_02;
+%session = AGBT17B_360_02;
 % % % % % Calibrator
-% on_scans = [80:86];
-% off_scans = [79,87];
-% source = source3C147;
-% Nint = -1;
-% note = '2nd_seven';
+%on_scans = [80:86];
+%off_scans = [79,87];
+%source = source3C147;
+Nint = -1;
+%note = '2nd_seven';
 
-% AGBT17B_360_03 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% session = AGBT17B_360_03;
+%% AGBT17B_360_03 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%session = AGBT17B_360_03;
 % % % % % Calibrator
-% on_scans = [6:12];
-% off_scans = [5,13];
-% source = source3C295;
-% Nint = -1;
-% note = 'seven';
+%on_scans = [6:12];
+%off_scans = [5,13];
+%source = source3C295;
+%Nint = -1;
+%note = 'seven';
 
 % AGBT17B_360_03 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % session = AGBT17B_360_03;
@@ -234,14 +234,14 @@ overwrite = overwrite | quick_map;
 % Nint = 2;
 % note = 'grid';
 
-% AGBT17B_360_04 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% session = AGBT17B_360_04;
+%% AGBT17B_360_04 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%session = AGBT17B_360_04;
 % % % % % Calibrator
-% on_scans = [72:78];
-% off_scans = [71,79];
-% source = source3C295;
-% Nint = -1;
-% note = 'seven';
+%on_scans = [72:78];
+%off_scans = [71,79];
+%source = source3C295;
+%Nint = -1;
+%note = 'seven';
 
 % AGBT17B_360_05 1st Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % session = AGBT17B_360_05;
@@ -327,8 +327,8 @@ overwrite = overwrite | quick_map;
 % AGBT17B_360_06 LO = 1450 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % session = AGBT17B_360_06;
 % % % % % Calibrator
-% on_scans = [64:70];  % Might be 1 less than this scan number.
-% off_scans = [63,71]; % Might be 1 less than this scan number.
+% on_scans = [64:70] - 1;  % Might be 1 less than this scan number.
+% off_scans = [63,71] - 1; % Might be 1 less than this scan number.
 % source = source3C48;
 % Nint = -1;
 % note = 'seven1450';
@@ -338,26 +338,26 @@ overwrite = overwrite | quick_map;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % AGBT17B_360_06 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% session = AGBT17B_360_06;
-% % % % Calibrator
-% on_scans = [71:75,77:81,83:87,89:93,95:99,101:105,107:110]; % Might be 1 less than this scan number.
-% off_scans = [76,82,88,94,100,106]; % Might be 1 less than this scan number.
-% source = source3C48;
-% Nint = 2;
-% note = 'grid';
+session = AGBT17B_360_06;
+% % % Calibrator
+on_scans = [71:75,77:81,83:87,89:93,95:99,101:105,107:110]; % Might be 1 less than this scan number.
+off_scans = [76,82,88,94,100,106]; % Might be 1 less than this scan number.
+source = source3C48;
+Nint = 2;
+note = 'grid';
 
 % AGBT17B_455_01 1st Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% session = AGBT17B_455_01;
+%session = AGBT17B_455_01;
 % % % % % Calibrator
-% on_scans = [7:13];
-% off_scans = [6,14];
-% source = source3C348; 
-% Nint = -1;
-% note = '1st_seven';
+%on_scans = [7:13];
+%off_scans = [6,14];
+%source = source3C348; 
+%Nint = -1;
+%note = '1st_seven';
 
 % AGBT17B_455_01 2nd Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % session = AGBT17B_455_01;
-% % % % % Calibrator
+% % % % % % Calibrator
 % on_scans = [112:118];
 % off_scans = [111,119];
 % source = source3C348; % Not in source table yet.
@@ -373,14 +373,14 @@ overwrite = overwrite | quick_map;
 % Nint = 2;
 % note = 'grid';
 
-% AGBT17B_360_07 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% session = AGBT17B_360_07;
+%% AGBT17B_360_07 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%session = AGBT17B_360_07;
 % % % % % Calibrator
-% on_scans = [188:194];
-% off_scans = [187,195];
-% source = source3C295;
-% Nint = -1;
-% note = 'seven';
+%on_scans = [188:194];
+%off_scans = [187,195];
+%source = source3C295;
+%Nint = -1;
+%note = 'seven';
 
 % AGBT18A_443_01 1st Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % session = AGBT18A_443_01;
@@ -566,7 +566,7 @@ overwrite = overwrite | quick_map;
 %note = 'seven';
  
 % AGBT19A_091_02 Seven-pt cal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-session = AGBT19A_091_02;
+%session = AGBT19A_091_02;
 % % % % % Calibrator
 %on_scans = [2:8];
 %off_scans = [1,9];
@@ -638,13 +638,13 @@ session = AGBT19A_091_02;
 %note='seven';
 
 % AGBT19A_365_06 Grid %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-session = AGBT19A_365_06;
+%session = AGBT19A_365_06;
 % % % % Calibrator
-on_scans = [2:6,8:12,14:18,20:24,26:30,32:36,38:41]+1;
-off_scans = [7,13,19,25,31,37]+1;
-source = source3C48;
-Nint = 2;
-note = 'grid';
+%on_scans = [2:6,8:12,14:18,20:24,26:30,32:36,38:41]+1;
+%off_scans = [7,13,19,25,31,37]+1;
+%source = source3C48;
+%Nint = 2;
+%note = 'grid';
 
 
 for p_idx = 1:2
@@ -696,7 +696,7 @@ for p_idx = 1:2
     x = a + b*log10(freq./1e3) + c*log10(freq./1e3).^2 + d*log10(freq./1e3).^3 + e*log10(freq./1e3).^4 + f*log10(freq./1e3).^5;
     flux_density = 10.^x;
 
-    ant_dir = sprintf('%s/%s/Antenna', meta_root, proj_str);
+    ant_dir = sprintf('%s/%s/Antenna', meta_root2, proj_str);
 
     % Iterate over off pointings just to have them ready
     % Iterate over on pointings and look for closest off pointing
@@ -704,6 +704,7 @@ for p_idx = 1:2
     % Iterate over off pointings
     AZoff = zeros(length(off_tstamp), 1);
     ELoff = zeros(length(off_tstamp), 1);
+    Roff_kw = [];
     fprintf('Processing off pointings...\n');
     on_off = 1;
     for j = 1:length(off_tstamp)
@@ -733,6 +734,7 @@ for p_idx = 1:2
         % Create entry in position table
         AZoff(j) = az;
         ELoff(j) = el;
+        Roff_kw(:,:,j) = squeeze(R(:,:,101));
     end
 
     traj_plot = figure();
@@ -746,7 +748,10 @@ for p_idx = 1:2
     Sens = [];
     AZ = [];
     EL = [];
+    AZ_kw = [];
+    EL_kw = [];
     cal = [];
+    R_kwtmp = [];
     on_off = 1;
     for i = 1:length(on_tstamp)
         tmp_stmp = on_tstamp{i};
@@ -824,6 +829,8 @@ for p_idx = 1:2
             end
             AZ = [AZ; az(t)];
             EL = [EL; el(t)];
+            AZ_kw(:,i) = az;
+            EL_kw(:,i) = el;
         end
         Sens = [Sens; Senstmp];
 
@@ -833,8 +840,13 @@ for p_idx = 1:2
             % Append to aggregated weight vector matrix
             w_agg = cat(2, w_agg, w);
         end
+        
+%         R_kw = [R_kw; R];
+        R_kwtmp(:,:,:,:,i) = R;
     end
-
+    R_kw = [];
+    R_kw = squeeze(R_kwtmp(:,:,101,:,:));
+    
     %if quick_map == 0
         a_filename = sprintf('%s/%s_aggregated_grid_%s_%s.mat', out_dir, session.session_name, pol, note);
         fprintf('Saving aggregated steering vectors to %s\n', a_filename);
@@ -843,12 +855,20 @@ for p_idx = 1:2
         w_filename = sprintf('%s/%s_aggregated_weights_%s_%s.mat', out_dir, session.session_name, pol, note);
         fprintf('Saving aggregated weight vectors to %s\n', w_filename);
         save(w_filename, 'AZ', 'EL', 'w_agg');
+        
+        R_filename = sprintf('%s/%s_aggregated_R_%s_%s.mat', out_dir, session.session_name, pol, note);
+        fprintf('Saving aggregated correlation matrices to %s\n', R_filename);
+        save(R_filename, 'AZ_kw', 'EL_kw', 'R_kw');
+        
+        Roff_filename = sprintf('%s/%s_aggregated_Roff_%s_%s.mat', out_dir, session.session_name, pol, note);
+        fprintf('Saving aggregated off correlation matrices to %s\n', Roff_filename);
+        save(Roff_filename, 'AZoff', 'ELoff', 'Roff_kw');
     %end
 
     % Plot map
 
     % Interpolated map
-    Npoints = 100;
+  Npoints = 100;
     % minX = -0.23; 
     % maxX = 0.23;
     % minY = -0.24;

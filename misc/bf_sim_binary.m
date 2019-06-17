@@ -6,7 +6,8 @@ addpath ../kernel/
 scan_table; % Found in kernel directory
 
 % Project directory
-Dir = '/users/jnybo/Output';     % '/lustre/flag/TMP/BF/';
+% Dir = '/users/jnybo/Output';     % '/lustre/flag/TMP/BF/';
+Dir = '/lustre/flag/TGBT16A_508_01/TMP/BF/';
 
 % Bank strings
 % banks = {'A', 'B', 'C', 'D',...
@@ -14,7 +15,7 @@ Dir = '/users/jnybo/Output';     % '/lustre/flag/TMP/BF/';
 %          'I', 'J', 'K', 'L',...
 %          'M', 'N', 'O', 'P',...
 %          'Q', 'R', 'S', 'T'};
-banks = {'A', 'B'};%, 'C', 'D'};
+banks = {'A', 'B', 'C', 'D'};
 
 Npol = 4; % X self-polarized, Y self-polarized, XY polarized (real), XY polarized (imaginary)
 Nbeam = 7;
@@ -23,7 +24,7 @@ Nbin = 25;
 Nsti = 100;
 outSize = Nbeam*Npol*Nbin*Nsti;
 
-beam_idx = 'beam_mcnt_';
+beam_idx = 'beamformer_';
 % Bout = zeros(7,4,100,1100); % The last dimension was chosen by looking at the size of the data.
 Bout = [];
 xid = 0;
@@ -32,7 +33,7 @@ B = [];
 for bank_idx = 1:length(banks)
     bank_str = banks{bank_idx};
     fprintf('%s\n', bank_str);
-    filename = sprintf('%s/%s0_%s.out', Dir,  beam_idx, bank_str);
+    filename = sprintf('%s/%s%s_mcnt_0.out', Dir,  beam_idx, bank_str);
 
     FILE = fopen(filename, 'r');
     [B_binary, count] = fread(FILE, 'single');
@@ -105,17 +106,17 @@ for b = 1:7
     %         xlabel('Frequency (MHz)');
     %         ylabel('Power (arb. units)');
 end
-for b = 1:1
-    figure(15);
-%     plot(fr, squeeze(abs(mean(Bint(b,1,:,:),4))));
-    plot(squeeze((abs(mean(Bint(b,1,:,:),4)))));
-    %         plot(fr, squeeze(abs(Bint(b,1,:,1))));
-    hold on;
-    grid on;
-    title('Simulated Source');
-    xlabel('Frequency (MHz)');
-    ylabel('Power (arb. units)');
-end
+% for b = 1:1
+%     figure(15);
+% %     plot(fr, squeeze(abs(mean(Bint(b,1,:,:),4))));
+%     plot(squeeze((abs(mean(Bint(b,1,:,:),4)))));
+%     %         plot(fr, squeeze(abs(Bint(b,1,:,1))));
+%     hold on;
+%     grid on;
+%     title('Simulated Source');
+%     xlabel('Frequency (MHz)');
+%     ylabel('Power (arb. units)');
+% end
 hold off;
 % end
 

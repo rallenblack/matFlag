@@ -2,6 +2,7 @@
 data_root = '/lustre/flag';
 meta_root = '/home/gbtdata';
 meta_root1 = '/home/archive/science-data/16B';
+meta_root2 = '/home/archive/science-data/17B';
 weight_dir = '/home/groups/flag/weight_files/';
 proj_id = 'AGBT16B_400';
 proj_id_2 = 'AGBT17B_360';
@@ -109,12 +110,14 @@ AGBT16B_400_02.Ydims = [51.8602, 52.5221];
 
 AGBT16B_400_02.fudge = 0;
 
-AGBT16B_400_02.on_scans = [13:15, 17:19, 21:23, 25:27, 29:31,...
-                           33:35, 37:39, 41:43, 45:47, 49:51, 53:55];
-AGBT16B_400_02.off_scans = [16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56];
+%AGBT16B_400_02.on_scans = [13:15, 17:19, 21:23, 25:27, 29:31,...
+%                           33:35, 37:39, 41:43, 45:47, 49:51, 53:55];
+%AGBT16B_400_02.off_scans = [16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56];
 
-AGBT16B_400_02.beam_el = [52.23, 52.32, 52.1,  52.19, 52.28, 52.07, 52.19];
-AGBT16B_400_02.beam_az = [212.7, 212.9, 212.7, 212.9, 213.1, 212.9, 213.1];
+AGBT16B_400_02.beam_el = [ 3.94, 3.94,  0.0, 0.0, 0.0, -3.94, -3.94]*1/60;
+AGBT16B_400_02.beam_az = [-2.275, 2.275, -4.55, 0.0, 4.55, -2.275,  2.275]*1/60;
+%AGBT16B_400_02.beam_el = [52.23, 52.32, 52.1,  52.19, 52.28, 52.07, 52.19];
+%AGBT16B_400_02.beam_az = [212.7, 212.9, 212.7, 212.9, 213.1, 212.9, 213.1];
 
 %% AGBT16B_400_03
 AGBT16B_400_03.session_name = 'AGBT16B_400_03';
@@ -545,7 +548,7 @@ AGBT16B_400_14.beam_az = [-0.5, 0.5, -1.0, 0.0, 1.0, -0.5,  0.5]*9/60;
 %% AGBT17B_360_01
 % % Scan numbers and time stamps
 AGBT17B_360_01.session_name = 'AGBT17B_360_01';
-log_filename = sprintf('%s/%s_01/ScanLog.fits', meta_root, proj_id_2);
+log_filename = sprintf('%s/%s_01/ScanLog.fits', meta_root2, proj_id_2);
 scan_data = fitsread(log_filename, 'bintable', 1);
 time_stamps = unique(scan_data{1});
 
@@ -582,7 +585,7 @@ AGBT17B_360_01.beam_az = [-2.275, 2.275, -4.55, 0.0, 4.55, -2.275,  2.275]*1/60;
 %% AGBT17B_360_02
 % % Scan numbers and time stamps
 AGBT17B_360_02.session_name = 'AGBT17B_360_02';
-log_filename = sprintf('%s/%s_02/ScanLog.fits', meta_root, proj_id_2);
+log_filename = sprintf('%s/%s_02/ScanLog.fits', meta_root2, proj_id_2);
 scan_data = fitsread(log_filename, 'bintable', 1);
 time_stamps = unique(scan_data{1});
 
@@ -619,7 +622,7 @@ AGBT17B_360_02.beam_az = [-2.275, 2.275, -4.55, 0.0, 4.55, -2.275,  2.275]*1/60;
 %% AGBT17B_360_03
 % % Scan numbers and time stamps
 AGBT17B_360_03.session_name = 'AGBT17B_360_03';
-log_filename = sprintf('%s/%s_03/ScanLog.fits', meta_root, proj_id_2);
+log_filename = sprintf('%s/%s_03/ScanLog.fits', meta_root2, proj_id_2);
 scan_data = fitsread(log_filename, 'bintable', 1);
 time_stamps = unique(scan_data{1});
 
@@ -656,7 +659,7 @@ AGBT17B_360_03.beam_az = [-2.275, 2.275, -4.55, 0.0, 4.55, -2.275,  2.275]*1/60;
 %% AGBT17B_360_04
 % % Scan numbers and time stamps
 AGBT17B_360_04.session_name = 'AGBT17B_360_04';
-log_filename = sprintf('%s/%s_04/ScanLog.fits', meta_root, proj_id_2);
+log_filename = sprintf('%s/%s_04/ScanLog.fits', meta_root2, proj_id_2);
 scan_data = fitsread(log_filename, 'bintable', 1);
 time_stamps = unique(scan_data{1});
 
@@ -693,7 +696,7 @@ AGBT17B_360_04.beam_az = [-2.275, 2.275, -4.55, 0.0, 4.55, -2.275,  2.275]*1/60;
 %% AGBT17B_360_05
 % % Scan numbers and time stamps
 AGBT17B_360_05.session_name = 'AGBT17B_360_05';
-log_filename = sprintf('%s/%s_05/ScanLog.fits', meta_root, proj_id_2);
+log_filename = sprintf('%s/%s_05/ScanLog.fits', meta_root2, proj_id_2);
 scan_data = fitsread(log_filename, 'bintable', 1);
 time_stamps = unique(scan_data{1});
 
@@ -730,7 +733,7 @@ AGBT17B_360_05.beam_az = [-2.275, 2.275, -4.55, 0.0, 4.55, -2.275,  2.275]*1/60;
 %% AGBT17B_360_06
 % % Scan numbers and time stamps
 AGBT17B_360_06.session_name = 'AGBT17B_360_06';
-log_filename = sprintf('%s/%s_06/ScanLog.fits', meta_root, proj_id_2);
+log_filename = sprintf('%s/%s_06/ScanLog.fits', meta_root2, proj_id_2);
 scan_data = fitsread(log_filename, 'bintable', 1);
 time_stamps = unique(scan_data{1});
 
@@ -767,7 +770,7 @@ AGBT17B_360_06.beam_az = [-2.275, 2.275, -4.55, 0.0, 4.55, -2.275,  2.275]*1/60;
 %% AGBT17B_360_07
 % % Scan numbers and time stamps
 AGBT17B_360_07.session_name = 'AGBT17B_360_07';
-log_filename = sprintf('%s/%s_07/ScanLog.fits', meta_root, proj_id_2);
+log_filename = sprintf('%s/%s_07/ScanLog.fits', meta_root2, proj_id_2);
 scan_data = fitsread(log_filename, 'bintable', 1);
 time_stamps = unique(scan_data{1});
 
@@ -804,7 +807,7 @@ AGBT17B_360_07.beam_az = [-2.275, 2.275, -4.55, 0.0, 4.55, -2.275,  2.275]*1/60;
 %% AGBT17B_455_01
 % % Scan numbers and time stamps
 AGBT17B_455_01.session_name = 'AGBT17B_455_01';
-log_filename = sprintf('%s/%s_01/ScanLog.fits', meta_root, proj_id_4);
+log_filename = sprintf('%s/%s_01/ScanLog.fits', meta_root2, proj_id_4);
 scan_data = fitsread(log_filename, 'bintable', 1);
 time_stamps = unique(scan_data{1});
 
